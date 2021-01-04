@@ -1,0 +1,1 @@
+# shopmanager_v2
