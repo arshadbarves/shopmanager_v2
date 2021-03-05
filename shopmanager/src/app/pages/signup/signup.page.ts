@@ -11,15 +11,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupPage implements OnInit {
   validationUserMessages = {
-    names: [{type: 'required', message: 'Please Enter your Full Name'}],
-    phone: [{type: 'required', message: 'Please Enter your Phone Number'}],
+    names: [{ type: 'required', message: 'Please Enter your Full Name' }],
+    phone: [{ type: 'required', message: 'Please Enter your Phone Number' }],
     email: [
-      {type: 'required', message: 'Please Enter your Email Address'},
-      {type: 'pattern', message: 'Please Enter valid Email Address'}
+      { type: 'required', message: 'Please Enter your Email Address' },
+      { type: 'pattern', message: 'Please Enter valid Email Address' }
     ],
     password: [
-      {type: 'required', message: 'Please enter your Password!'},
-      {type: 'minlength', message: 'The Password must be atleast 6 characters or more'}
+      { type: 'required', message: 'Please enter your Password!' },
+      { type: 'minlength', message: 'The Password must be atleast 6 characters or more' }
     ]
   };
   validationFormUser: FormGroup;
@@ -48,33 +48,33 @@ export class SignupPage implements OnInit {
     });
   }
 
-  registerUser(value){
+  registerUser(value) {
     this.showalert();
-    try{
-      this.authservice.userRegistration(value).then( response => {
-      console.log(response);
-      if (response.user){
-        response.user.updateProfile ({
-          displayName: value.names,
-          email: value.email,
-          phoneNumber: value.phone
-        });
+    try {
+      this.authservice.userRegistration(value).then(response => {
+        console.log(response);
+        if (response.user) {
+          response.user.updateProfile({
+            displayName: value.names,
+            email: value.email,
+            phoneNumber: value.phone
+          });
+          this.loading.dismiss();
+          this.router.navigate(['loginscreen']);
+        }
+      }, error => {
         this.loading.dismiss();
-        this.router.navigate(['loginscreen']);
-      }
-    }, error => {
-      this.loading.dismiss();
-      this.errorLoading(error.message);
-    });
+        this.errorLoading(error);
+      });
     }
-    catch (err){
+    catch (err) {
       console.log(err);
     }
   }
-  async errorLoading(message: any) {
+  async errorLoading(err: any) {
     const loading = await this.alertController.create({
-      header: 'Error!',
-      message,
+      header: 'Sign up failed!',
+      message: err.message,
       buttons: [{
         text: 'Ok',
         handler: () => {

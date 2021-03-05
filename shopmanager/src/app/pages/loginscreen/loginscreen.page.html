@@ -1,13 +1,4 @@
-<ion-header class="ion-no-border">
-    <ion-toolbar>
-        <!-- <ion-title>loginscreen</ion-title> -->
-    </ion-toolbar>
-    <ion-buttons slot="start">
-        <ion-back-button defaulthref="login" text=""></ion-back-button>
-    </ion-buttons>
-</ion-header>
-
-<ion-content>
+<ion-content mode="ios">
     <ion-card class="ion-no-margin">
         <ion-img src="assets/images/loginscreen_header.svg"></ion-img>
 
@@ -23,7 +14,8 @@
                     </ion-item>
                     <div>
                         <ng-container *ngFor="let validation of validationUserMessage.email">
-                            <div class="error_message" *ngIf="validationFormUser.get('email').hasError(validation.type) && (validationFormUser.get('email').dirty || validationFormUser.get('email').touched)">
+                            <div class="error_message"
+                                *ngIf="validationFormUser.get('email').hasError(validation.type) && (validationFormUser.get('email').dirty || validationFormUser.get('email').touched)">
                                 {{validation.message}}
                             </div>
                         </ng-container>
@@ -35,7 +27,8 @@
                     </ion-item>
                     <div>
                         <ng-container *ngFor="let validation of validationUserMessage.password">
-                            <div class="error_message" *ngIf="validationFormUser.get('password').hasError(validation.type) && (validationFormUser.get('password').dirty || validationFormUser.get('password').touched)">
+                            <div class="error_message"
+                                *ngIf="validationFormUser.get('password').hasError(validation.type) && (validationFormUser.get('password').dirty || validationFormUser.get('password').touched)">
                                 {{validation.message}}
                             </div>
                         </ng-container>
@@ -45,7 +38,8 @@
                     <ion-button fill="clear" class="ion-no-padding">Forgot Password?</ion-button>
                 </div>
                 <div class="sign-btn-wrap">
-                    <ion-button fill="solid" shape="round" type="sumbit" class="sign-btn" [disabled]="!validationFormUser.valid">Login</ion-button>
+                    <ion-button fill="solid" shape="round" type="sumbit" class="sign-btn"
+                        [disabled]="!validationFormUser.valid">Login</ion-button>
                 </div>
             </form>
         </ion-card-content>

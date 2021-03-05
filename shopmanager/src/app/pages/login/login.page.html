@@ -1,11 +1,6 @@
-<ion-header class="ion-no-border">
-    <ion-toolbar>
-        <!-- <ion-title>login</ion-title> -->
-    </ion-toolbar>
-</ion-header>
-<ion-content>
+<ion-content mode="ios">
+    <ion-img src="assets/images/login_header.svg"></ion-img>
     <ion-card class="ion-no-margin">
-        <ion-img src="assets/images/login_header.svg"></ion-img>
         <ion-card-header>
             <ion-card-title>
                 Welcome
@@ -21,10 +16,11 @@
                 </ion-button>
                 <div class="text-tag">
                     <span>
-                      Or
+                        or
                     </span>
                 </div>
-                <ion-button [routerLink]="['/signup']" fill="outline" shape="round" expand="block" color="dark" class="signupbtn">Sign Up</ion-button>
+                <ion-button [routerLink]="['/signup']" fill="outline" shape="round" expand="block" color="dark"
+                    class="signupbtn">Sign Up</ion-button>
             </div>
 
         </ion-card-content>

@@ -1,14 +1,14 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>home</ion-title>
-    </ion-toolbar>
-</ion-header>
+<ion-content mode="ios">
+    <ion-header class="ion-no-border" mode="ios">
+        <ion-toolbar>
+            <ion-title>Dashboard</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <div class="cardContent">
+        <ion-card *ngFor="let card of carddata" button tappable [routerLink]="">
 
-<ion-content>
-    <div class="wrapContent">
-        <div>
-            <h1>Hello World</h1>
-            <p>Todo</p>
-        </div>
+            <ion-icon [name]="card.icon"></ion-icon>
+            <h5>{{card.title}}</h5>
+        </ion-card>
     </div>
 </ion-content>

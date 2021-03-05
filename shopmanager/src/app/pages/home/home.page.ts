@@ -6,8 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  constructor() { }
+  carddata: any;
+  constructor() {
+    this.carddata = [{
+      'title': 'Mobile',
+      'icon': 'call'
+    },
+    {
+      'title': 'Landline',
+      'icon': 'basket'
+    },
+    {
+      'title': 'Stock Item Entry',
+      'icon': 'basket'
+    }]
+  }
 
   ngOnInit() {
   }

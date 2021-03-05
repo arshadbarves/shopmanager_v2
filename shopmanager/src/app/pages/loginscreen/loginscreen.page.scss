@@ -2,22 +2,13 @@ ion-content {
     --ion-background-color: #E1EAF9 !important;
 }
 
-ion-header {
-    position: absolute;
-}
-
-ion-toolbar {
-    --ion-backgroud-color: transparent;
-    --opacity: 0;
-}
-
 ion-card {
     --ion-background-color: transparent;
     box-shadow: none !important;
 }
 
 .wrapform {
-    margin-top: 15px;
+    margin-top: 0%;
 }
 
 ion-item {
@@ -26,7 +17,8 @@ ion-item {
     --highlight-color-focused: #1248A0;
     --padding-start: 0;
     --inner-padding-end: 0;
-    font-size: 13px;
+    text-indent: 3%;
+    font-size: calc(var(--smalltitle) + var(--font-size-adj));
     ion-input {
         color: #647B9D;
     }
@@ -34,15 +26,14 @@ ion-item {
         color: #1248A0;
     }
     ion-icon {
-        padding-right: 6px;
-        font-size: 18px;
+        font-size: calc(var(--normal) + var(--font-size-adj));
     }
 }
 
 .password_forgot {
     text-align: right;
     ion-button {
-        font-size: 12px;
+        font-size: calc(var(--xsmalltitle) + var(--font-size-adj));
         color: #0A4296;
         text-transform: none;
     }
@@ -50,35 +41,37 @@ ion-item {
 
 .sign-btn-wrap {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 5%;
     .sign-btn {
         --ion-color-primary: #215AB7;
         --background-activated: #E1EAF9;
         --background-focused: #E1EAF9;
         --background-hover: #647B9D;
         color: #F4F6FA;
-        border-radius: 20px;
+        border-radius: 100%;
+        width: 50%;
         --background: #215AB7;
         background-color: #215AB7;
+        font-size: calc(var(--normal) + var(--font-size-adj));
     }
 }
 
 .ion-card-footer {
     width: 100%;
-    height: 40px;
+    height: 5%;
     align-items: center;
     justify-content: center;
     display: flex;
     span {
         color: #85888D;
-        font-size: 12px;
+        font-size: calc(var(--xsmalltitle) + var(--font-size-adj));
         font-weight: 200;
     }
     button {
         background-color: transparent;
-        font-size: 14px;
+        font-size: calc(var(--xsmalltitle) + var(--font-size-adj));
         font-weight: 600;
-        padding-left: 3px;
+        padding-left: 1%;
         color: #535558;
     }
     button:hover {
@@ -87,7 +80,7 @@ ion-item {
 }
 
 .error_message {
-    font-size: 10px;
+    font-size: calc(var(--xsmalltitle) + var(--font-size-adj));
     font-weight: 200;
-    color: 913e07;
+    color: #913e07;
 }

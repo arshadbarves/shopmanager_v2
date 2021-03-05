@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router, private Auth: AuthService) { }
 
   ngOnInit() {
   }
 
+
+  async logout() {
+    await this.Auth.usersignout();
+    this.route.navigateByUrl('/');
+  }
 }

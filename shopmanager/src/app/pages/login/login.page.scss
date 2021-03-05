@@ -2,57 +2,51 @@ ion-content {
     --ion-background-color: #E1EAF9 !important;
 }
 
-ion-header {
-    position: absolute;
-}
-
-ion-toolbar {
-    --ion-backgroud-color: transparent;
-    --opacity: 0;
-}
-
-signin-btns {
-    margin-top: 25px;
-    text-align: center;
-    justify-content: center;
-    color: #F0F4FA;
-}
-
 ion-card {
     --ion-background-color: transparent;
     box-shadow: none !important;
-}
 
-ion-card-title {
-    margin-top: 20px;
-    font-size: 30px;
-    color: #080808;
-    text-align: center;
-    font-weight: 600;
-}
+    .signin-btns {
+        text-align: center;
+        color: #F0F4FA;
+        .loginbtn {
+            --ion-color-primary: #215AB7;
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            font-size: calc(var(--normal) + var(--font-size-adj));
+        }   
 
-ion-card-subtitle {
-    padding-top: 10px;
-    font-size: 11px;
-    color: #898585;
-    text-align: center;
-    font-weight: 300;
-}
+        .signupbtn {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            font-size: calc(var(--normal) + var(--font-size-adj));
+        }
+}    
 
-.loginbtn {
-    --ion-color-primary: #215AB7;
-    margin: 1em 0 1em 0;
-}
+    ion-card-title {
+        margin-top: 0%;
+        font-size: calc(var(--largetitle) + var(--font-size-adj));
+        color: #080808;
+        text-align: center;
+        font-weight: 600;
+    }
 
-.signupbtn {
-    margin: 1em 0 1em 0;
-}
-
-.text-tag {
-    text-align: center;
-    span {
-        font-size: 13px;
-        font-weight: normal;
+    ion-card-subtitle {
+        padding-top: 2%;
+        font-size: calc(var(--xsmalltitle) + var(--font-size-adj));
         color: #898585;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    .text-tag {
+        text-align: center;
+        span {
+            font-size: calc(var(--normal) + var(--font-size-adj));
+            color: #898585;
+        }
     }
 }
+
