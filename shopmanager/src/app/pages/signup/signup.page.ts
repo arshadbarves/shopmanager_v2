@@ -1,3 +1,4 @@
+import { UserProfileService } from './../../services/user-profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,7 +26,7 @@ export class SignupPage implements OnInit {
   validationFormUser: FormGroup;
   loading: any;
   // tslint:disable-next-line: max-line-length
-  constructor(private formbuilder: FormBuilder, private authservice: AuthService, private router: Router, public loadingController: LoadingController, public alertController: AlertController, public navCtrl: NavController) {
+  constructor(private formbuilder: FormBuilder, private userProfileService: UserProfileService, private authservice: AuthService, private router: Router, public loadingController: LoadingController, public alertController: AlertController, public navCtrl: NavController) {
     this.loading = this.loadingController;
   }
 
@@ -52,7 +53,6 @@ export class SignupPage implements OnInit {
     this.showalert();
     try {
       this.authservice.userRegistration(value).then(response => {
-        console.log(response);
         if (response.user) {
           response.user.updateProfile({
             displayName: value.names,
@@ -60,7 +60,14 @@ export class SignupPage implements OnInit {
             phoneNumber: value.phone
           });
           this.loading.dismiss();
+          this.userProfileService.addUserInfo(response.user.uid, {
+            displayName: value.names,
+            email: value.email,
+            phoneNumber: value.phone
+          });
+          this.userProfileService.setUserUID(response.user.uid);
           this.router.navigate(['loginscreen']);
+          this.authservice.userLogIn();
         }
       }, error => {
         this.loading.dismiss();

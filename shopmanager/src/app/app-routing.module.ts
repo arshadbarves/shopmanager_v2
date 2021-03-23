@@ -42,6 +42,19 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
     ...canActivate(redirectUnauthorizedToLogin),
   },
+  {
+    path: 'item-entry',
+    loadChildren: () => import('./pages/item-entry/item-entry.module').then(m => m.ItemEntryPageModule)
+  },
+  {
+    path: 'items',
+    loadChildren: () => import('./pages/items/items.module').then(m => m.ItemsPageModule)
+  },
+  {
+    path: 'items/:id',
+    loadChildren: () => import('./pages/edit-stock-item/edit-stock-item.module').then(m => m.EditStockItemPageModule)
+  },
+
 ];
 
 @NgModule({

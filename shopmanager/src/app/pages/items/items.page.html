@@ -1,0 +1,77 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Stock Items</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="stockItemcollection?.length > 0" mode="ios">
+  <ion-card *ngFor="let carddata of stockItemcollection">
+    <div class="ion-no-padding">
+      <div class="itemName">
+        Item Name:
+        <span>
+          {{ carddata.itemName }}
+        </span>
+      </div>
+      <div class="cardcontent">
+        <div class="sellingPrice">
+          Price:
+          <span>
+            ₹ {{carddata.sellingPrice}}
+          </span>
+        </div>
+        <div class="quantity">
+          Quantity:
+          <span>
+            {{carddata.quantity}}
+          </span>
+        </div>
+        <div class="dateOfPurchase">
+          Date:
+          <span>
+            {{carddata.dateOfPurchase.toDate() | date: "MMM dd, yyyy"}}
+          </span>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="actionbtns">
+        <ion-button class="deletebtn" expand="round" fill="solid" color="danger" (click)="deleteStockItem(carddata)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+        <ion-button class="editbtn" expand="round" fill="solid" color="success" [routerLink]="carddata.id">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/item-entry']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content *ngIf="stockItemcollection?.length <= 0 || !stockItemcollection">
+  <div *ngIf="noItemData?.length <= 0 || !noItemData">
+    <div class="ion-padding custom-skeleton" *ngFor="let i of [1,2,3,4,5]">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </div>
+  <div class="no-items">
+    <h1>
+      {{noItemData}}
+    </h1>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/item-entry']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

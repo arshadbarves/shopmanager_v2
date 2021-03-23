@@ -2,6 +2,10 @@ ion-content {
     --ion-background-color: transparent;
 }
 
+ion-back-button{
+    --color: #0f3864;
+}
+
 .bg-color {
     background: #E1EAF9;
 }
@@ -40,7 +44,7 @@ ion-card-subtitle {
 ion-item {
     color: #74787E;
     --border-color: #D4D7DB;
-    --highlight-color-focused: #215AB7;
+    --highlight-color-focused: #0f3864;
     --padding-start: 0;
     --inner-padding-end: 0;
     font-size: calc(var(--smalltitle) + var(--font-size-adj));
@@ -52,7 +56,7 @@ ion-item {
         }
     }
     ion-input:hover {
-        color: #215AB7;
+        color: #0f3864;
     }
 }
 
@@ -60,15 +64,15 @@ ion-item {
     text-align: center;
     padding-top: 10%;
     .sign-btn {
-        --ion-color-primary: #215AB7;
-        --background: #215AB7;
-        --background-activated: #E1EAF9;
+        --ion-color-primary: #0f3864;
+        --background: #0f3864;
+        --background-activated: #647B9D;
         --background-focused: #E1EAF9;
         --background-hover: #647B9D;
         color: #F4F6FA;
         border-radius: 100%;
         width: 50%;
-        background-color: #215AB7;
+        background-color: #0f3864;
         font-size: calc(var(--normal) + var(--font-size-adj));
     }
 }
@@ -90,7 +94,7 @@ ion-item {
         font-size: calc(var(--xsmalltitle) + var(--font-size-adj));
         font-weight: 600;
         padding-left: 1%;
-        color: #535558;
+        color: #0f3864;
     }
     button:hover {
         color: #969393;

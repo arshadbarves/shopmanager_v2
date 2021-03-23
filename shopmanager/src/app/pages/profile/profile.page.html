@@ -1,11 +1,18 @@
-<ion-header>
+<ion-header class="ion-no-border" mode="ios">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>{{userProfile.fullName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button (click)="logout()">
-    Logout
-  </ion-button>
+<ion-content mode="ios">
+  <div id="header">
+    <div class="profile-name"><span></span></div>
+  </div>
+  <div class="profile-menu">
+    <ion-button expand="full">Edit Profile</ion-button>
+    <ion-button expand="full">Rewards & Coupons</ion-button>
+    <ion-button expand="full">Help Center</ion-button>
+    <ion-button expand="full">Payment</ion-button>
+    <ion-button (click)="logout()" expand="full">Logout</ion-button>
+  </div>
 </ion-content>

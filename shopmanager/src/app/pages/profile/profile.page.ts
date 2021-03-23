@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { UserProfileService } from './../../services/user-profile.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -8,15 +10,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  userProfile: any;
+  uid: any;
+  constructor(private route: Router, private Auth: AuthService, private userProfileService: UserProfileService) { }
 
-  constructor(private route: Router, private Auth: AuthService) { }
+  async ngOnInit() {
+    this.uid = await this.userProfileService.getUserUID();
+    this.userProfileService.getUserInfo(this.uid).onSnapshot((res) => {
+      this.userProfile = {
+        fullName: res.data().fullName,
+        email: res.data().email,
+      };
+      console.log(this.userProfile);
 
-  ngOnInit() {
+    })
   }
 
 
   async logout() {
-    await this.Auth.usersignout();
+    await this.Auth.userLogOut();
+    this.userProfileService.removeUserUID();
     this.route.navigateByUrl('/');
   }
 }

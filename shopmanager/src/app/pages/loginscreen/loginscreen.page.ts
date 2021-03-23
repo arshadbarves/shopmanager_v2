@@ -1,8 +1,10 @@
-import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { UserProfileService } from './../../services/user-profile.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-loginscreen',
@@ -10,54 +12,56 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
   styleUrls: ['./loginscreen.page.scss'],
 })
 export class LoginscreenPage implements OnInit {
-validationUserMessage = {
-  email: [
-    {type: 'required', message: 'Please Enter your Email Address'},
-    {type: 'pattern', message: 'Please Enter valid Email Address'}
-  ],
-  password: [
-    {type: 'required', message: 'Please enter your Password!'},
-    {type: 'minlength', message: 'The Password must be atleast 6 characters or more'}
-  ]
-};
-validationFormUser: FormGroup;
-loading: any;
+  validationUserMessage = {
+    email: [
+      { type: 'required', message: 'Please Enter your Email Address' },
+      { type: 'pattern', message: 'Please Enter valid Email Address' }
+    ],
+    password: [
+      { type: 'required', message: 'Please enter your Password!' },
+      { type: 'minlength', message: 'The Password must be atleast 6 characters or more' }
+    ]
+  };
+  validationFormUser: FormGroup;
+  loading: any;
 
   // tslint:disable-next-line: max-line-length
-  constructor(public formbuilder: FormBuilder, public authservice: AuthService, private router: Router, public loadingController: LoadingController, public alertController: AlertController, public navCtrl: NavController ) {
+  constructor(public formbuilder: FormBuilder, private userProfileService: UserProfileService, public authservice: AuthService, private router: Router, public loadingController: LoadingController, public alertController: AlertController, public navCtrl: NavController) {
     this.loading = this.loadingController;
-   }
+  }
 
   ngOnInit() {
     this.validationFormUser = this.formbuilder.group({
-      email: new FormControl('', Validators.compose([
+      email: new FormControl('test@admin.com', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      password: new FormControl('', Validators.compose([
+      password: new FormControl('asdf1234', Validators.compose([
         Validators.required,
         Validators.minLength(6)
       ]))
     });
   }
 
-  LoginUser(value){
+  LoginUser(value) {
     this.showalert();
-    console.log('Am logged in');
-    try{
-      this.authservice.loginFireauth(value).then( resp => {
-      console.log(resp);
-      this.loading.dismiss();
-      this.router.navigate(['tabs']);
-    }, error => {
-      this.loading.dismiss();
-      this.errorLoading(error.message);
-    });
+    try {
+      this.authservice.loginFireauth(value).then(resp => {
+        this.loading.dismiss();
+        this.userProfileService.setUserUID(resp.user.uid);
+        this.router.navigate(['tabs']);
+        this.authservice.userLogIn();
+      }, error => {
+        this.loading.dismiss();
+        this.errorLoading(error.message);
+      });
     }
-    catch (err){
+    catch (err) {
       console.log(err);
     }
   }
+
+
   async errorLoading(message: any) {
     const loading = await this.alertController.create({
       header: 'Error!',

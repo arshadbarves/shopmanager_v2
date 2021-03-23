@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+  <form (ngSubmit)="editItem(editItemForm.value)" [formGroup]="editItemForm">
+    <ion-item lines="full">
+      <ion-label position="floating">Item Code</ion-label>
+      <ion-input name="ItemCode" type="text" required formControlName="itemCode"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Item Name</ion-label>
+      <ion-input name="ItemName" type="text" required formControlName="itemName"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Purchase Price</ion-label>
+      <ion-input name="PurchasePrice" type="number" required formControlName="purchasePrice"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Tax</ion-label>
+      <ion-input name="Tax" type="number" required formControlName="tax"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Expense</ion-label>
+      <ion-input name="Expense" type="number" (ionBlur)='calculateSellingPrice(editItemForm.value)' required
+        formControlName="expense"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Selling Price</ion-label>
+      <ion-input name="SellingPrice" type="number" readonly required formControlName="sellingPrice"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Quantity</ion-label>
+      <ion-input name="Quantity" type="number" required formControlName="quantity"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Date Of Purchase</ion-label>
+      <ion-datetime name="DateOfPurchase" displayFormat="DDD MMM DD, YYYY" formControlName="dateOfPurchase">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Bill Reference</ion-label>
+      <ion-input name="BillReference" type="text" required formControlName="billReference"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" color="success" fill="solid" shape="round" expand="block">Update Item</ion-button>
+
+  </form>
+</ion-content>

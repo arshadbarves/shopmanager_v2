@@ -27,13 +27,13 @@
   </defs>
   <g id="Mask_Group_8" data-name="Mask Group 8" clip-path="url(#clip-path)">
     <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_6)">
-      <rect id="Rectangle_6-2" data-name="Rectangle 6" width="402" height="372" rx="23" transform="matrix(0.6, 0.8, -0.8, 0.6, 321.21, -240.73)" fill="#596fec"/>
+      <rect id="Rectangle_6-2" data-name="Rectangle 6" width="402" height="372" rx="23" transform="matrix(0.6, 0.8, -0.8, 0.6, 321.21, -240.73)" fill="#0f3864"/>
     </g>
     <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_7)">
       <rect id="Rectangle_7-2" data-name="Rectangle 7" width="402" height="372" rx="23" transform="matrix(0.97, 0.26, -0.26, 0.97, 2.61, -224.95)" fill="#bdcfed"/>
     </g>
     <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_5)">
-      <rect id="Rectangle_5-2" data-name="Rectangle 5" width="402" height="372" rx="23" transform="matrix(0.97, 0.26, -0.26, 0.97, -8.39, -246.95)" fill="#215ab7"/>
+      <rect id="Rectangle_5-2" data-name="Rectangle 5" width="402" height="372" rx="23" transform="matrix(0.97, 0.26, -0.26, 0.97, -8.39, -246.95)" fill="#0f3864"/>
     </g>
   </g>
 </svg>

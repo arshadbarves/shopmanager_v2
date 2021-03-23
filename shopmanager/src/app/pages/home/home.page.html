@@ -1,14 +1,18 @@
-<ion-content mode="ios">
-    <ion-header class="ion-no-border" mode="ios">
-        <ion-toolbar>
-            <ion-title>Dashboard</ion-title>
-        </ion-toolbar>
-    </ion-header>
-    <div class="cardContent">
-        <ion-card *ngFor="let card of carddata" button tappable [routerLink]="">
+<ion-header #header class="ion-no-border" mode="ios">
+    <div class="shader"></div>
+    <ion-toolbar>
+        <ion-title>Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content mode="ios" [scrollEvents]="true" (ionScroll)="logScrolling($event)" (ionScrollStart)="scrollStart(header)">
 
-            <ion-icon [name]="card.icon"></ion-icon>
-            <h5>{{card.title}}</h5>
+    <div class="header-space"></div>
+    <div class="cardContent">
+        <ion-card *ngFor="let card of carddata" button tappable routerLink="/{{card.route}}">
+            <ion-card-content>
+                <ion-icon [ngStyle]="{'color':card.color}" [name]="card.icon"></ion-icon>
+                <ion-text>{{card.title}}</ion-text>
+            </ion-card-content>
         </ion-card>
     </div>
 </ion-content>

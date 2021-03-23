@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthService {
+  db = firebase.firestore();
 
   constructor(public auth: AngularFireAuth, private route: Router) { }
 
@@ -28,8 +29,11 @@ export class AuthService {
     });
   }
 
-  usersignout() {
-    console.log("User Logout");
+  userLogIn() {
+    this.db.enablePersistence();
+  }
+
+  userLogOut() {
     return this.auth.signOut();
   }
 }

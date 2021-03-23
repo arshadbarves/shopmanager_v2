@@ -10,7 +10,11 @@ ion-card {
         text-align: center;
         color: #F0F4FA;
         .loginbtn {
-            --ion-color-primary: #215AB7;
+            --ion-color-primary: #0f3864;
+            --background: #0f3864;
+            --background-activated: #647B9D;
+            --background-focused: #E1EAF9;
+            --background-hover: #647B9D;
             width: 50%;
             margin-left: 25%;
             margin-right: 25%;
