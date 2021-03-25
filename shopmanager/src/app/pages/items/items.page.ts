@@ -20,6 +20,7 @@ export class ItemsPage implements OnInit {
     this.uid = await this.userProfileService.getUserUID();
     this.stockItemsService.getStockItems(this.uid).subscribe(res => {
       this.stockItemcollection = res;
+      console.log(res);
     });
   }
 

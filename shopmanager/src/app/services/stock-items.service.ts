@@ -37,7 +37,12 @@ export class StockItemsService {
       sellingPrice: itemInfoDetail.sellingPrice,
       quantity: itemInfoDetail.quantity,
       dateOfPurchase: firebase.default.firestore.Timestamp.fromDate(new Date(itemInfoDetail.dateOfPurchase)).toDate(),
-      billReference: itemInfoDetail.billReference
+      billReference: itemInfoDetail.billReference,
+      storeAssignment: {
+        assignedQty: itemInfoDetail.quantity,
+        availableQty: itemInfoDetail.quantity,
+        storeCode: "home"
+      }
     });
   }
 
@@ -52,7 +57,12 @@ export class StockItemsService {
       sellingPrice: itemInfoDetail.sellingPrice,
       quantity: itemInfoDetail.quantity,
       dateOfPurchase: firebase.default.firestore.Timestamp.fromDate(new Date(itemInfoDetail.dateOfPurchase)).toDate(),
-      billReference: itemInfoDetail.billReference
+      billReference: itemInfoDetail.billReference,
+      storeAssignment: {
+        assignedQty: itemInfoDetail.quantity,
+        availableQty: itemInfoDetail.quantity,
+        storeCode: "home"
+      }
     });
   }
 
