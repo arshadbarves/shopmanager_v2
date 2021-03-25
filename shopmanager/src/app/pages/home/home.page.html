@@ -5,7 +5,6 @@
     </ion-toolbar>
 </ion-header>
 <ion-content mode="ios" [scrollEvents]="true" (ionScroll)="logScrolling($event)" (ionScrollStart)="scrollStart(header)">
-
     <div class="header-space"></div>
     <div class="cardContent">
         <ion-card *ngFor="let card of carddata" button tappable routerLink="/{{card.route}}">
