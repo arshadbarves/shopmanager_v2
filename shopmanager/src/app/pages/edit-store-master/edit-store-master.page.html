@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Store Master</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+  <form (ngSubmit)="editStoreMaster(editStoreMasterForm.value)" [formGroup]="editStoreMasterForm">
+    <ion-item lines="full">
+      <ion-label position="floating">Store Code</ion-label>
+      <ion-input name="StoreCode" type="text" required formControlName="storeCode"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input name="Name" type="text" required formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input name="Address" required formControlName="address"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">User Responsible</ion-label>
+      <ion-input name="UserResponsible" required formControlName="userResponsible"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" color="success" fill="solid" shape="round" expand="block">Add Item</ion-button>
+
+  </form>
+</ion-content>

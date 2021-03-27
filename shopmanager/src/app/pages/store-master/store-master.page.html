@@ -3,42 +3,42 @@
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Stock Items</ion-title>
+    <ion-title>Store Master</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="stockItemCollection?.length > 0" mode="ios">
-  <ion-card *ngFor="let carddata of stockItemCollection">
+<ion-content *ngIf="storeMasterCollection?.length > 0" mode="ios">
+  <ion-card *ngFor="let carddata of storeMasterCollection">
     <div class="ion-no-padding">
-      <div class="itemName">
-        Item Name:
+      <div class="storeCode">
+        Store Code:
         <span>
-          {{ carddata.itemName }}
+          {{ carddata.storeCode }}
         </span>
       </div>
       <div class="cardcontent">
-        <div class="sellingPrice">
-          Price:
+        <div class="storeName">
+          Name:
           <span>
-            ₹ {{carddata.sellingPrice}}
+            ₹ {{carddata.name}}
           </span>
         </div>
-        <div class="quantity">
-          Quantity:
+        <div class="userResponsible">
+          User Responsible:
           <span>
-            {{carddata.quantity}}
-          </span>
-        </div>
-        <div class="dateOfPurchase">
-          Date:
-          <span>
-            {{carddata.dateOfPurchase.toDate() | date: "MMM dd, yyyy"}}
+            {{carddata.userResponsible}}
           </span>
         </div>
       </div>
+      <div class="address">
+        Address:
+        <span>
+          {{carddata.address}}
+        </span>
+      </div>
       <!-- <div class="line"></div> -->
       <div class="actionbtns">
-        <ion-button class="deletebtn" expand="round" fill="clear" color="danger" (click)="deleteStockItem(carddata)">
+        <ion-button class="deletebtn" expand="round" fill="clear" color="danger" (click)="deleteStoreMasterDetail(carddata)">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
         <ion-button class="editbtn" expand="round" fill="clear" color="primary" [routerLink]="carddata.id">
@@ -48,13 +48,13 @@
     </div>
   </ion-card>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/item-entry']">
+    <ion-fab-button [routerLink]="['/store-master-entry']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
 
-<ion-content *ngIf="stockItemCollection?.length <= 0 || !stockItemCollection">
+<ion-content *ngIf="storeMasterCollection?.length <= 0 || !storeMasterCollection">
   <div *ngIf="noItemData?.length <= 0 || !noItemData">
     <div class="ion-padding custom-skeleton" *ngFor="let i of [1,2,3,4,5]">
       <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
@@ -70,7 +70,7 @@
     </h1>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/item-entry']">
+    <ion-fab-button [routerLink]="['/store-master-entry']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

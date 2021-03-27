@@ -1,6 +1,6 @@
 import { UserProfileService } from './../../services/user-profile.service';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { StockItemsService } from 'src/app/services/stock-items.service';
 
 @Component({
@@ -9,23 +9,44 @@ import { StockItemsService } from 'src/app/services/stock-items.service';
   styleUrls: ['./items.page.scss'],
 })
 export class ItemsPage implements OnInit {
-  stockItemcollection: any;
+  stockItemCollection: any;
   noItemData: any;
   uid: any;
-  constructor(private stockItemsService: StockItemsService, public navCtrl: NavController, private userProfileService: UserProfileService) {
+  constructor(private alertController: AlertController,private stockItemsService: StockItemsService, public navCtrl: NavController, private userProfileService: UserProfileService) {
 
   }
 
   async ngOnInit() {
     this.uid = await this.userProfileService.getUserUID();
     this.stockItemsService.getStockItems(this.uid).subscribe(res => {
-      this.stockItemcollection = res;
+      this.stockItemCollection = res;
       console.log(res);
     });
   }
 
-  deleteStockItem(item) {
-    this.stockItemsService.deleteStockItem(this.uid, item.id);
+  async deleteStockItem(item) {
+    var alert = await this.alertController.create({
+      header: "Delete Confirmation",
+      message: "Do you want to delete this item '" + item.itemName + "'",
+      backdropDismiss: false,
+      animated: true,
+      translucent:true,
+      buttons:[
+        {
+          text:"Confirm",
+          cssClass: 'secondary',
+          handler: () => {
+            this.stockItemsService.deleteStockItem(this.uid, item.id);
+          }
+        },
+        {
+          text:"Cancel",
+          role:"cancel"
+        }
+      ]
+    });
+    alert.present();
+    
   }
 
   ionViewWillEnter() {

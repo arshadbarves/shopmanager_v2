@@ -54,6 +54,19 @@ const routes: Routes = [
     path: 'items/:id',
     loadChildren: () => import('./pages/edit-stock-item/edit-stock-item.module').then(m => m.EditStockItemPageModule)
   },
+  {
+    path: 'store-master',
+    loadChildren: () => import('./pages/store-master/store-master.module').then( m => m.StoreMasterPageModule)
+  },
+  {
+    path: 'store-master-entry',
+    loadChildren: () => import('./pages/store-master-entry/store-master-entry.module').then( m => m.StoreMasterEntryPageModule)
+  },
+  {
+    path: 'store-master/:id',
+    loadChildren: () => import('./pages/edit-store-master/edit-store-master.module').then( m => m.EditStoreMasterPageModule)
+  },
+
 
 ];
 

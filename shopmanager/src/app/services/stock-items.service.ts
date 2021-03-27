@@ -38,11 +38,11 @@ export class StockItemsService {
       quantity: itemInfoDetail.quantity,
       dateOfPurchase: firebase.default.firestore.Timestamp.fromDate(new Date(itemInfoDetail.dateOfPurchase)).toDate(),
       billReference: itemInfoDetail.billReference,
-      storeAssignment: {
+      storeAssignment: [{
         assignedQty: itemInfoDetail.quantity,
         availableQty: itemInfoDetail.quantity,
         storeCode: "home"
-      }
+      }]
     });
   }
 
@@ -58,11 +58,11 @@ export class StockItemsService {
       quantity: itemInfoDetail.quantity,
       dateOfPurchase: firebase.default.firestore.Timestamp.fromDate(new Date(itemInfoDetail.dateOfPurchase)).toDate(),
       billReference: itemInfoDetail.billReference,
-      storeAssignment: {
+      storeAssignment: [{
         assignedQty: itemInfoDetail.quantity,
         availableQty: itemInfoDetail.quantity,
         storeCode: "home"
-      }
+      }]
     });
   }
 

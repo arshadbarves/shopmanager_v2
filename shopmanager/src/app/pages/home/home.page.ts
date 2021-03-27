@@ -13,16 +13,17 @@ export class HomePage implements OnInit {
     this.carddata = [
       {
         'id': 1,
-        'title': 'Mobile',
-        'icon': 'call',
+        'title': 'Stock Items',
+        'icon': 'list',
         'color': '#ff7b84',
         'route': 'items'
       },
       {
         'id': 2,
-        'title': 'Landline',
-        'icon': 'basket',
-        'color': '#2196f3'
+        'title': 'Store Master',
+        'icon': 'storefront',
+        'color': '#2196f3',
+        'route': 'store-master'
       },
       {
         'id': 3,
