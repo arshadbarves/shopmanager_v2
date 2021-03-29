@@ -21,7 +21,7 @@ export class ItemsPage implements OnInit {
 
   async ngOnInit() {
     this.uid = await this.userProfileService.getUserUID();
-    this.stockItemsService.getStockItems(this.uid).subscribe(res => {
+    this.stockItemsService.getStockItems().subscribe(res => {
       this.stockItemCollection = res;
       this.data = this.stockItemCollection;
     });
@@ -50,7 +50,7 @@ export class ItemsPage implements OnInit {
           text: "Confirm",
           cssClass: 'secondary',
           handler: () => {
-            this.stockItemsService.deleteStockItem(this.uid, item.id);
+            this.stockItemsService.deleteStockItem(item.id);
           }
         },
         {

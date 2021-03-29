@@ -15,7 +15,6 @@ export class EditStockItemPage implements OnInit {
   itemSellingPrice: any;
   itemDetail: any;
   itemID: any;
-  uid: any;
 
   constructor(private formbuilder: FormBuilder, private userProfileService: UserProfileService, private route: ActivatedRoute, private stockItemsService: StockItemsService, private router: Router) {
     this.itemID = this.route.snapshot.paramMap.get('id');
@@ -34,8 +33,7 @@ export class EditStockItemPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
-    this.itemDetail = this.stockItemsService.getItem(this.uid, this.itemID).onSnapshot((itemInfo) => {
+    this.itemDetail = this.stockItemsService.getItem(this.itemID).onSnapshot((itemInfo) => {
       let value = itemInfo.data();
       this.editItemForm = this.formbuilder.group({
         itemCode: value.itemCode,
@@ -63,7 +61,7 @@ export class EditStockItemPage implements OnInit {
       dateOfPurchase: value.dateOfPurchase,
       billReference: value.billReference
     });
-    this.stockItemsService.editStockItem(this.uid, this.itemID, this.editItemForm.value);
+    this.stockItemsService.editStockItem(this.itemID, this.editItemForm.value);
     this.router.navigateByUrl('/items');
   }
 

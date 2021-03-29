@@ -12,7 +12,7 @@ import { StockItemsService } from 'src/app/services/stock-items.service';
 export class ItemEntryPage implements OnInit {
   addItemForm: FormGroup;
   itemSellingPrice: any;
-  uid: any;
+
   constructor(private formbuilder: FormBuilder, private stockItemsService: StockItemsService, private router: Router, private userProfileService: UserProfileService) {
     this.addItemForm = this.formbuilder.group({
       itemCode: [''],
@@ -27,9 +27,7 @@ export class ItemEntryPage implements OnInit {
     });
   }
 
-  async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
-
+  ngOnInit() {
   }
 
   addItem(value) {
@@ -44,7 +42,7 @@ export class ItemEntryPage implements OnInit {
       dateOfPurchase: value.dateOfPurchase,
       billReference: value.billReference
     });
-    this.stockItemsService.addStockItem(this.uid, this.addItemForm.value);
+    this.stockItemsService.addStockItem(this.addItemForm.value);
     this.router.navigateByUrl('/items');
   }
 

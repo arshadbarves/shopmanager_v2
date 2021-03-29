@@ -17,17 +17,17 @@ export class StockItemsService {
 
   }
 
-  getStockItems(uid) {
-    this.stockItemsCollection = this.fireStore.collection('userProfile').doc(uid).collection('itemList');
+  getStockItems() {
+    this.stockItemsCollection = this.fireStore.collection('itemList');
     return this.stockItemsCollection.valueChanges({ idField: 'id' });
   }
 
-  deleteStockItem(uid, itemId) {
-    this.fireStore.collection('userProfile').doc(uid).collection('itemList').doc(itemId).delete();
+  deleteStockItem(itemId) {
+    this.fireStore.collection('itemList').doc(itemId).delete();
   }
 
-  addStockItem(uid, itemInfoDetail) {
-    this.itemInfo = this.fireStore.collection('userProfile').doc(uid).collection('itemList');
+  addStockItem(itemInfoDetail) {
+    this.itemInfo = this.fireStore.collection('itemList');
     this.itemInfo.add({
       itemCode: itemInfoDetail.itemCode,
       itemName: itemInfoDetail.itemName,
@@ -46,8 +46,8 @@ export class StockItemsService {
     });
   }
 
-  editStockItem(uid, itemID, itemInfoDetail) {
-    this.itemInfo = this.fireStore.collection('userProfile').doc(uid).collection('itemList').doc(itemID);
+  editStockItem(itemID, itemInfoDetail) {
+    this.itemInfo = this.fireStore.collection('itemList').doc(itemID);
     this.itemInfo.update({
       itemCode: itemInfoDetail.itemCode,
       itemName: itemInfoDetail.itemName,
@@ -66,7 +66,28 @@ export class StockItemsService {
     });
   }
 
-  getItem(uid, itemID) {
-    return this.db.collection('userProfile').doc(uid).collection('itemList').doc(itemID);
+  getItem(itemID) {
+    return this.db.collection('itemList').doc(itemID);
+  }
+
+  updateStockItem(itemID, itemInfoDetail) {
+
+    this.itemInfo = this.db.collection('itemList').doc(itemID);
+
+    this.itemInfo.update({
+      storeAssignment: [{
+        assignedQty: itemInfoDetail.detail.qtyAvailable,
+        availableQty: itemInfoDetail.detail.qtyAvailable - itemInfoDetail.detail.qtyRequested,
+        storeCode: "home"
+      }]
+    });
+    this.itemInfo.update({
+      storeAssignment: firebase.default.firestore.FieldValue.arrayUnion(
+        {
+          assignedQty: itemInfoDetail.detail.qtyRequested,
+          availableQty: itemInfoDetail.detail.qtyRequested,
+          storeCode: itemInfoDetail.detail.toStore
+        })
+    });
   }
 }

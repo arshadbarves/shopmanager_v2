@@ -1,3 +1,4 @@
+import { StockItemsService } from './../../services/stock-items.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { TransactionService } from './../../services/transaction.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ export class TransactionDetailsPage implements OnInit {
   transactionDetailsInfo: any;
   currentUserInfo: any;
 
-  constructor(private route: ActivatedRoute, private userProfileService: UserProfileService, private transactionService: TransactionService, private router: Router) {
+  constructor(private route: ActivatedRoute, private stockItemsService: StockItemsService, private userProfileService: UserProfileService, private transactionService: TransactionService, private router: Router) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.transactionDetailsInfo = this.router.getCurrentNavigation().extras.state.transactionDetailInfo;
       this.transactionDetails = this.transactionDetailsInfo.detail;
@@ -26,6 +27,7 @@ export class TransactionDetailsPage implements OnInit {
 
   acceptRequest() {
     this.transactionService.updateTransaction(this.currentUserInfo.email, this.transactionDetailsInfo);
+    this.stockItemsService.updateStockItem(this.transactionDetailsInfo.detail.itemId, this.transactionDetailsInfo);
     this.router.navigateByUrl('/');
   }
 

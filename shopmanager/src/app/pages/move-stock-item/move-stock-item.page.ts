@@ -55,7 +55,9 @@ export class MoveStockItemPage implements OnInit {
           fromStore: this.data.storeAssignment[0].storeCode,
           toStore: this.selectedStore,
           qtyRequested: this.qtyToMove,
-          email: this.currentUserInfo.email
+          qtyAvailability: this.data.storeAssignment[0].availableQty,
+          email: this.currentUserInfo.email,
+          itemId: this.data.id,
         }
         this.transactionService.RequestToMove(this.transactionInfo);
         this.router.navigateByUrl('items');
