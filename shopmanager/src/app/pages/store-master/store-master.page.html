@@ -20,7 +20,7 @@
         <div class="storeName">
           Name:
           <span>
-            ₹ {{carddata.name}}
+            {{carddata.name}}
           </span>
         </div>
         <div class="userResponsible">
@@ -38,7 +38,8 @@
       </div>
       <!-- <div class="line"></div> -->
       <div class="actionbtns">
-        <ion-button class="deletebtn" expand="round" fill="clear" color="danger" (click)="deleteStoreMasterDetail(carddata)">
+        <ion-button class="deletebtn" expand="round" fill="clear" color="danger"
+          (click)="deleteStoreMasterDetail(carddata)">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
         <ion-button class="editbtn" expand="round" fill="clear" color="primary" [routerLink]="carddata.id">

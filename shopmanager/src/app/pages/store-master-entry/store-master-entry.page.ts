@@ -13,18 +13,26 @@ export class StoreMasterEntryPage implements OnInit {
   addStoreMasterForm: FormGroup;
   itemSellingPrice: any;
   uid: any;
-  
-  constructor(private formbuilder: FormBuilder, private storeMasterService: StoreMasterService , private router: Router, private userProfileService: UserProfileService) {
+  userList: any;
+
+  customActionSheetOptions: any = {
+    header: 'Select User'
+  };
+
+  constructor(private formbuilder: FormBuilder, private storeMasterService: StoreMasterService, private router: Router, private userProfileService: UserProfileService) {
     this.addStoreMasterForm = this.formbuilder.group({
       storeCode: [''],
       name: [''],
       address: [''],
       userResponsible: ['']
     });
-   }
+  }
 
   async ngOnInit() {
     this.uid = await this.userProfileService.getUserUID();
+    this.userProfileService.getAllUsers().subscribe(res => {
+      this.userList = res;
+    });
   }
 
   addStoreMaster(value) {
@@ -34,7 +42,7 @@ export class StoreMasterEntryPage implements OnInit {
       address: value.address,
       userResponsible: value.userResponsible
     });
-    this.storeMasterService.addStoreMaster(this.uid, this.addStoreMasterForm.value);
+    this.storeMasterService.addStoreMaster(this.addStoreMasterForm.value);
     this.router.navigateByUrl('/store-master');
   }
 

@@ -27,9 +27,10 @@ export class HomePage implements OnInit {
       },
       {
         'id': 3,
-        'title': 'Stock Item Entry',
-        'icon': 'basket',
-        'color': '#ae60d5'
+        'title': 'Transactions Area',
+        'icon': 'repeat',
+        'color': '#ae60d5',
+        'route': 'transactions'
       },
       {
         'id': 4,

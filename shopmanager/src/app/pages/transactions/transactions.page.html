@@ -1,0 +1,58 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Transactions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="transactionList?.length > 0" mode="ios">
+  <ion-card button tappable (click)="transactionNav(carddata)" *ngFor="let carddata of transactionList">
+    <div class="ion-no-padding">
+      <div class="storeCode">
+        From Store:
+        <span>
+          {{ carddata.data().fromStore }}
+        </span>
+      </div>
+      <div class="cardcontent">
+        <div class="storeName">
+          Quantity Requested:
+          <span>
+            {{carddata.data().qtyRequested}}
+          </span>
+        </div>
+        <div class="userResponsible">
+          Requested User:
+          <span>
+            {{carddata.data().requestedUser}}
+          </span>
+        </div>
+      </div>
+      <div class="address">
+        Status:
+        <span>
+          {{carddata.data().status}}
+        </span>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="transactionList?.length <= 0 || !transactionList">
+  <div *ngIf="noItemData?.length <= 0 || !noItemData">
+    <div class="ion-padding custom-skeleton" *ngFor="let i of [1,2,3,4,5]">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </div>
+  <div class="no-items">
+    <h1>
+      {{noItemData}}
+    </h1>
+  </div>
+</ion-content>

@@ -13,13 +13,11 @@ export class StoreMasterPage implements OnInit {
   noItemData: any;
   uid: any;
 
-  constructor(private alertController: AlertController,private storeMasterService: StoreMasterService, public navCtrl: NavController, private userProfileService: UserProfileService) { }
+  constructor(private alertController: AlertController, private storeMasterService: StoreMasterService, public navCtrl: NavController) { }
 
   async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
-    this.storeMasterService.getStoreMaster(this.uid).subscribe(res => {
+    this.storeMasterService.getStoreMaster().subscribe(res => {
       this.storeMasterCollection = res;
-      console.log(res);
     });
   }
 
@@ -29,28 +27,28 @@ export class StoreMasterPage implements OnInit {
       message: "Do you want to delete this item '" + item.itemName + "'",
       backdropDismiss: false,
       animated: true,
-      translucent:true,
-      buttons:[
+      translucent: true,
+      buttons: [
         {
-          text:"Confirm",
+          text: "Confirm",
           cssClass: 'secondary',
           handler: () => {
-            this.storeMasterService.deleteStoreMaster(this.uid, item.id);
+            this.storeMasterService.deleteStoreMaster(item.id);
           }
         },
         {
-          text:"Cancel",
-          role:"cancel"
+          text: "Cancel",
+          role: "cancel"
         }
       ]
     });
     alert.present();
-    
+
   }
 
   ionViewWillEnter() {
     setTimeout(() => {
       this.noItemData = "NO STORE MASTER AVAILABLE!"
-    }, 5000);
+    }, 3000);
   }
 }

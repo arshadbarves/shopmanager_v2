@@ -14,7 +14,12 @@ export class EditStoreMasterPage implements OnInit {
   storeDetail: any;
   storeId: any;
   uid: any;
-  
+  userList: any;
+
+  customActionSheetOptions: any = {
+    header: 'Select User'
+  };
+
   constructor(private formbuilder: FormBuilder, private userProfileService: UserProfileService, private route: ActivatedRoute, private storeMasterService: StoreMasterService, private router: Router) {
     this.storeId = this.route.snapshot.paramMap.get('id');
 
@@ -24,11 +29,14 @@ export class EditStoreMasterPage implements OnInit {
       address: [''],
       userResponsible: ['']
     });
-   }
+  }
 
   async ngOnInit() {
     this.uid = await this.userProfileService.getUserUID();
-    this.storeDetail = this.storeMasterService.getStoreMasterDetail(this.uid, this.storeId).onSnapshot((storeInfo) => {
+    this.userProfileService.getAllUsers().subscribe(res => {
+      this.userList = res;
+    });
+    this.storeDetail = this.storeMasterService.getStoreMasterDetail(this.storeId).onSnapshot((storeInfo) => {
       let value = storeInfo.data();
       this.editStoreMasterForm = this.formbuilder.group({
         storeCode: value.storeCode,
@@ -46,7 +54,7 @@ export class EditStoreMasterPage implements OnInit {
       address: value.address,
       userResponsible: value.userResponsible
     });
-    this.storeMasterService.editStoreMaster(this.uid, this.storeId, this.editStoreMasterForm.value);
+    this.storeMasterService.editStoreMaster(this.storeId, this.editStoreMasterForm.value);
     this.router.navigateByUrl('/store-master');
   }
 

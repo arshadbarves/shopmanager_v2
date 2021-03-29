@@ -49,6 +49,11 @@ export class LoginscreenPage implements OnInit {
       this.authservice.loginFireauth(value).then(resp => {
         this.loading.dismiss();
         this.userProfileService.setUserUID(resp.user.uid);
+        this.userProfileService.storeUserInfoLocal(resp.user.uid, {
+          displayName: value.displayName,
+          email: value.email,
+          phoneNumber: value.phoneNumber
+        });
         this.router.navigate(['tabs']);
         this.authservice.userLogIn();
       }, error => {

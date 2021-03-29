@@ -5,10 +5,11 @@
     </ion-buttons>
     <ion-title>Stock Items</ion-title>
   </ion-toolbar>
+  <ion-searchbar (ionInput)="searchItem($event)" class="searchbox" animated></ion-searchbar>
 </ion-header>
 
-<ion-content *ngIf="stockItemCollection?.length > 0" mode="ios">
-  <ion-card *ngFor="let carddata of stockItemCollection">
+<ion-content *ngIf="data?.length > 0" mode="ios">
+  <ion-card *ngFor="let carddata of data">
     <div class="ion-no-padding">
       <div class="itemName">
         Item Name:
@@ -41,7 +42,10 @@
         <ion-button class="deletebtn" expand="round" fill="clear" color="danger" (click)="deleteStockItem(carddata)">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
-        <ion-button class="editbtn" expand="round" fill="clear" color="primary" [routerLink]="carddata.id">
+        <ion-button class="movebtn" expand="round" fill="clear" color="tertiary" (click)="moveStockItem(carddata)">
+          <ion-icon name="arrow-redo"></ion-icon>
+        </ion-button>
+        <ion-button class="editbtn" expand="round" fill="clear" color="tertiary" [routerLink]="carddata.id">
           <ion-icon name="pencil"></ion-icon>
         </ion-button>
       </div>
@@ -54,7 +58,7 @@
   </ion-fab>
 </ion-content>
 
-<ion-content *ngIf="stockItemCollection?.length <= 0 || !stockItemCollection">
+<ion-content *ngIf="data?.length <= 0 || !data">
   <div *ngIf="noItemData?.length <= 0 || !noItemData">
     <div class="ion-padding custom-skeleton" *ngFor="let i of [1,2,3,4,5]">
       <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>

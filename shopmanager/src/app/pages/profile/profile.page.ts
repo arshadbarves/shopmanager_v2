@@ -29,7 +29,7 @@ export class ProfilePage implements OnInit {
 
   async logout() {
     await this.Auth.userLogOut();
-    this.userProfileService.removeUserUID();
+    this.userProfileService.removeUser();
     this.route.navigateByUrl('/');
   }
 }

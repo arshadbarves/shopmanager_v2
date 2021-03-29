@@ -27,11 +27,6 @@ ion-header {
   margin-bottom: 5px;
 }
 
-ion-fab-button {
-    --background: #0f3864;
-    --background-activated: #0f3864;
-    --color: #34ef7e;
-}
 
 .no-items {
     margin:10%;
@@ -90,29 +85,5 @@ ion-card {
                 font-size: calc(var(--smalltitle) + var(--font-size-adj));
                 font-weight: 400;
             }
-    }
-
-    .actionbtns{
-        display: flex;
-        justify-content: center;
-        grid-template-columns: 1fr 1fr;
-        border: 1px solid #0f3864;
-        border-radius: 0 0 10px 10px ;
-
-        .deletebtn {
-            width: 100%;
-            padding: 0 10% 0 10%;
-        }
-
-        .editbtn {
-            width: 100%;
-            padding: 0 10% 0 10%;
-        }
-    }
-
-     .line{
-        width: 100%;
-        height: auto;
-        border-bottom: 1px solid #0f3864;
     }
 }

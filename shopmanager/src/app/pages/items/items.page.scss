@@ -18,6 +18,11 @@ ion-header {
     }
 }
 
+.searchbox{
+    --background: #ffffff;
+    text-align: left;
+}
+
 /* Custom Skeleton Line Height and Margin */
 .custom-skeleton ion-skeleton-text {
   line-height: 13px;
@@ -89,14 +94,9 @@ ion-card {
         border: 1px solid #0f3864;
         border-radius: 0 0 10px 10px ;
 
-        .deletebtn {
+        .deletebtn, .editbtn, .movebtn {
             width: 100%;
-            padding: 0 10% 0 10%;
-        }
-
-        .editbtn {
-            width: 100%;
-            padding: 0 10% 0 10%;
+            padding: 0 5%;
         }
     }
 

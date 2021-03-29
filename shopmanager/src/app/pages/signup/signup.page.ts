@@ -65,6 +65,11 @@ export class SignupPage implements OnInit {
             email: value.email,
             phoneNumber: value.phone
           });
+          this.userProfileService.storeUserInfoLocal(response.user.uid, {
+            displayName: value.names,
+            email: value.email,
+            phoneNumber: value.phone
+          });
           this.userProfileService.setUserUID(response.user.uid);
           this.router.navigate(['loginscreen']);
           this.authservice.userLogIn();

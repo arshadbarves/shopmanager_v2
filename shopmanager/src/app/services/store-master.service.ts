@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { UserProfileService } from './user-profile.service';
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -12,21 +11,20 @@ export class StoreMasterService {
   editstoreMasterInfo: any;
   db = firebase.default.firestore();
 
-  constructor(private fireStore: AngularFirestore, private userProfileService: UserProfileService) {
+  constructor(private fireStore: AngularFirestore) {
+  }
 
-   }
-
-  getStoreMaster(uid) {
-    this.storeMasterCollection = this.fireStore.collection('userProfile').doc(uid).collection('storeMasterList');
+  getStoreMaster() {
+    this.storeMasterCollection = this.fireStore.collection('storeMasterList');
     return this.storeMasterCollection.valueChanges({ idField: 'id' });
   }
 
-  deleteStoreMaster(uid, storeMasterId) {
-    this.fireStore.collection('userProfile').doc(uid).collection('storeMasterList').doc(storeMasterId).delete();
+  deleteStoreMaster(storeMasterId) {
+    this.fireStore.collection('storeMasterList').doc(storeMasterId).delete();
   }
 
-  addStoreMaster(uid, storeMasterInfoDetail) {
-    this.storeMasterInfo = this.fireStore.collection('userProfile').doc(uid).collection('storeMasterList');
+  addStoreMaster(storeMasterInfoDetail) {
+    this.storeMasterInfo = this.fireStore.collection('storeMasterList');
     this.storeMasterInfo.add({
       storeCode: storeMasterInfoDetail.storeCode,
       name: storeMasterInfoDetail.name,
@@ -35,8 +33,8 @@ export class StoreMasterService {
     });
   }
 
-  editStoreMaster(uid, storeMasterId, storeMasterInfoDetail) {
-    this.editstoreMasterInfo = this.fireStore.collection('userProfile').doc(uid).collection('storeMasterList').doc(storeMasterId);
+  editStoreMaster(storeMasterId, storeMasterInfoDetail) {
+    this.editstoreMasterInfo = this.fireStore.collection('storeMasterList').doc(storeMasterId);
     this.editstoreMasterInfo.update({
       storeCode: storeMasterInfoDetail.storeCode,
       name: storeMasterInfoDetail.name,
@@ -45,7 +43,7 @@ export class StoreMasterService {
     });
   }
 
-  getStoreMasterDetail(uid, storeMasterId) {
-    return this.db.collection('userProfile').doc(uid).collection('storeMasterList').doc(storeMasterId);
+  getStoreMasterDetail(storeMasterId) {
+    return this.db.collection('storeMasterList').doc(storeMasterId);
   }
 }

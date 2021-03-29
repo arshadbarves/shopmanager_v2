@@ -1,0 +1,50 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Move Stock Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+  <div class="itemName">
+    <ion-label>Item: </ion-label>
+    {{data.itemName}}
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="itemcontent">
+        <ion-item lines="none">
+          <ion-label>Quantity: </ion-label>
+          {{data.storeAssignment[0].availableQty}}
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Price: </ion-label>₹
+          {{data.sellingPrice}}
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>From Store: </ion-label>
+          {{data.storeAssignment[0].storeCode}}
+        </ion-item>
+        <ion-item class="selectStore" lines="none">
+          <ion-label>To Store: </ion-label>
+          <ion-select [(ngModel)]="selectedStore" placeholder="Select Store"
+            [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+            <ion-select-option *ngFor="let store of storeList" value="{{store.storeCode}}">{{store.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="qtyItem" lines="none">
+          <ion-label>Quantity to Move: </ion-label>
+          <ion-input [(ngModel)]="qtyToMove" type="number"></ion-input>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-button type="submit" color="success" fill="solid" shape="round" expand="block" (click)="requestToMove()">Request
+    to
+    move Item</ion-button>
+
+</ion-content>

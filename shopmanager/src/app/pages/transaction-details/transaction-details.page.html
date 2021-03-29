@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Transaction Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+  <div class="itemName">
+    <ion-label>Item: </ion-label>
+    {{transactionDetails.itemName}}
+  </div>
+
+  <ion-card *ngIf="transactionDetails">
+    <ion-card-content>
+      <div class="itemcontent">
+        <ion-item lines="none">
+          <ion-label>Item Code: </ion-label>
+          {{transactionDetails.itemCode}}
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>From Store: </ion-label>₹
+          {{transactionDetails.fromStore}}
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Requested User: </ion-label>
+          {{transactionDetails.requestedUser}}
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Quantity Requested: </ion-label>
+          {{transactionDetails.qtyRequested}}
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Requested Date: </ion-label>
+          {{transactionDetails.requestedDate.toDate() | date: "dd/MMM/yy"}}
+        </ion-item>
+
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-button type="submit" color="success" fill="solid" shape="round" expand="block" (click)="acceptRequest()">Accept
+    Request</ion-button>
+</ion-content>

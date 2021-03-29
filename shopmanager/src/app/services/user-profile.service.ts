@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Plugins } from '@capacitor/core';
+import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
 import * as firebase from 'firebase';
+import { userInfo } from 'os';
 
 const { Storage } = Plugins;
 
@@ -11,6 +13,7 @@ const { Storage } = Plugins;
 export class UserProfileService {
   userProfilInfo: any;
   uid: any;
+  currentUserInfo: any;
   db = firebase.default.firestore()
   constructor(private fireStore: AngularFirestore) { }
 
@@ -35,11 +38,34 @@ export class UserProfileService {
     });
   }
 
-  removeUserUID() {
+  storeUserInfoLocal(uid, userInfo) {
+    Storage.set({
+      key: 'userInfo',
+      value: JSON.stringify({
+        UID: uid,
+        fullName: userInfo.displayName,
+        email: userInfo.email,
+        phoneNumber: userInfo.phoneNumber
+      })
+    });
+  }
+
+  removeUser() {
     Storage.remove({ key: 'UID' });
+    Storage.remove({ key: 'userInfo' });
   }
 
   getUserInfo(uid) {
     return this.db.collection('userProfile').doc(uid);
+  }
+
+  async getCurrentUserInfo() {
+    this.currentUserInfo = await Storage.get({ key: 'userInfo' });
+    return JSON.parse(this.currentUserInfo.value);
+  }
+
+  getAllUsers() {
+    let userList = this.fireStore.collection('userProfile');
+    return userList.valueChanges();
   }
 }

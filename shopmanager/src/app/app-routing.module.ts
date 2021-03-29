@@ -56,16 +56,30 @@ const routes: Routes = [
   },
   {
     path: 'store-master',
-    loadChildren: () => import('./pages/store-master/store-master.module').then( m => m.StoreMasterPageModule)
+    loadChildren: () => import('./pages/store-master/store-master.module').then(m => m.StoreMasterPageModule)
   },
   {
     path: 'store-master-entry',
-    loadChildren: () => import('./pages/store-master-entry/store-master-entry.module').then( m => m.StoreMasterEntryPageModule)
+    loadChildren: () => import('./pages/store-master-entry/store-master-entry.module').then(m => m.StoreMasterEntryPageModule)
   },
   {
     path: 'store-master/:id',
-    loadChildren: () => import('./pages/edit-store-master/edit-store-master.module').then( m => m.EditStoreMasterPageModule)
+    loadChildren: () => import('./pages/edit-store-master/edit-store-master.module').then(m => m.EditStoreMasterPageModule)
   },
+  {
+    path: 'transactions',
+    loadChildren: () => import('./pages/transactions/transactions.module').then(m => m.TransactionsPageModule)
+  },
+  {
+    path: 'move-stock-item',
+    loadChildren: () => import('./pages/move-stock-item/move-stock-item.module').then(m => m.MoveStockItemPageModule)
+  },
+  {
+    path: 'transaction-details',
+    loadChildren: () => import('./pages/transaction-details/transaction-details.module').then(m => m.TransactionDetailsPageModule)
+  },
+
+
 
 
 ];

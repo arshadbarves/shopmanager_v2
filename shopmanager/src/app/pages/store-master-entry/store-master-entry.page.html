@@ -26,10 +26,14 @@
 
     <ion-item lines="full">
       <ion-label position="floating">User Responsible</ion-label>
-      <ion-input name="UserResponsible" required formControlName="userResponsible"></ion-input>
+      <ion-select placeholder="Select User" formControlName="userResponsible"
+        [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+        <ion-select-option *ngFor="let user of userList" value="{{user.email}}">{{user.email}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
-    <ion-button type="submit" color="success" fill="solid" shape="round" expand="block">Add Item</ion-button>
+    <ion-button type="submit" color="success" fill="solid" shape="round" expand="block">Add Store</ion-button>
 
   </form>
 </ion-content>
