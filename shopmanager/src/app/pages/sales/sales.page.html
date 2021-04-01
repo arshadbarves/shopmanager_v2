@@ -1,0 +1,63 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Billing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="itemList?.length > 0 || !itemList" mode="ios" class="ion-padding">
+  <ion-list *ngFor="let carddata of itemList; let idx = index" (click)="EditModal(carddata)">
+    <ion-item-sliding id="{{carddata.id}}">
+      <ion-item>
+        <ion-label>
+          <h2>
+            Item: {{carddata.itemName}}
+          </h2>
+          <p>
+            Rate: ₹{{carddata.rate}}
+          </p>
+          <p>
+            Quantity: {{carddata.qty}}
+          </p>
+        </ion-label>
+        <ion-label>
+          Price: ₹{{carddata.totalQtyPrice}}
+        </ion-label>
+      </ion-item>
+
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger">
+          <ion-icon slot="icon-only" name="trash" (click)="removeItem(carddata)"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-button size="large" shape="round" expand="block" (click)="collectCash()">
+      <ion-icon slot="start" name="wallet"></ion-icon>
+      Collect Cash
+    </ion-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="AddModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content *ngIf="itemList?.length <= 0 || !itemList">
+  <div class="no-items">
+    <h1>
+      ADD ITEM
+    </h1>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="AddModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

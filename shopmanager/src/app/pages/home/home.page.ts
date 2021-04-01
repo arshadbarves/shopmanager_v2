@@ -34,9 +34,10 @@ export class HomePage implements OnInit {
       },
       {
         'id': 4,
-        'title': 'Mobile',
-        'icon': 'call',
-        'color': '#0c549b'
+        'title': 'Sales',
+        'icon': 'clipboard',
+        'color': '#0c549b',
+        'route': 'sales'
       },
       {
         'id': 5,

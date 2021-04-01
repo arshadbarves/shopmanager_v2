@@ -78,8 +78,17 @@ const routes: Routes = [
     path: 'transaction-details',
     loadChildren: () => import('./pages/transaction-details/transaction-details.module').then(m => m.TransactionDetailsPageModule)
   },
-
-
+  {
+    path: 'sales',
+    loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesPageModule)
+  },  {
+    path: 'add-item-modal',
+    loadChildren: () => import('./pages/add-item-modal/add-item-modal.module').then( m => m.AddItemModalPageModule)
+  },
+  {
+    path: 'edit-item-qty-modal',
+    loadChildren: () => import('./pages/edit-item-qty-modal/edit-item-qty-modal.module').then( m => m.EditItemQtyModalPageModule)
+  },
 
 
 ];

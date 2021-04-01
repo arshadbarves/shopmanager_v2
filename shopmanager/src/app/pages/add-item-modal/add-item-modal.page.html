@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-title>Add Item</ion-title>
+    <ion-button fill="clear" slot="end" (click)="dismissModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+  <ion-searchbar (ionInput)="searchItem($event)" class="searchbox" animated></ion-searchbar>
+</ion-header>
+
+<ion-content *ngIf="data?.length > 0" mode="ios">
+  <ion-card button tappable (click)="selectedItem(carddata)" *ngFor="let carddata of data" class="ion-padding">
+    <div>
+      <div class="itemName">
+        Item Name:
+        <span>
+          {{ carddata.itemName }}
+        </span>
+      </div>
+      <div class="cardcontent">
+        <div class="sellingPrice">
+          Price:
+          <span>
+            ₹ {{carddata.sellingPrice}}
+          </span>
+        </div>
+        <div class="quantity">
+          Quantity:
+          <span>
+            {{carddata.quantity}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
+<ion-content *ngIf="data?.length <= 0 || !data">
+  <div *ngIf="noItemData?.length <= 0 || !noItemData">
+    <div class="ion-padding custom-skeleton" *ngFor="let i of [1,2,3,4,5]">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </div>
+  <div class="no-items">
+    <h1>
+      {{noItemData}}
+    </h1>
+  </div>
+</ion-content>

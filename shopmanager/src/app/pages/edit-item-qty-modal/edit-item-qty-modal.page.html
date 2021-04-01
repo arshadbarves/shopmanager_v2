@@ -1,0 +1,17 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-title>{{name}}</ion-title>
+    <ion-button fill="clear" slot="end" (click)="dismissModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content mode="ios">
+  <ion-item class="ion-padding">
+    <ion-label position="floating">Quantity</ion-label>
+    <ion-input [formControl]='qtyInput' type="number"></ion-input>
+  </ion-item>
+  <ion-button [disabled]="qtyInput.invalid" class="confirmbtn" type="submit" (click)="confirmQty()" color="success"
+    fill="solid" shape="round" expand="block">Confirm
+  </ion-button>
+</ion-content>
