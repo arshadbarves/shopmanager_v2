@@ -27,8 +27,8 @@ export class StockItemsService {
   }
 
   addStockItem(itemInfoDetail) {
-    this.itemInfo = this.fireStore.collection('itemList');
-    this.itemInfo.add({
+    this.itemInfo = this.fireStore.collection('itemList').doc((itemInfoDetail.itemCode).toString());
+    this.itemInfo.set({
       itemCode: itemInfoDetail.itemCode,
       itemName: itemInfoDetail.itemName,
       purchasePrice: itemInfoDetail.purchasePrice,

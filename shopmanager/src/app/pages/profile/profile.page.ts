@@ -15,17 +15,8 @@ export class ProfilePage implements OnInit {
   constructor(private route: Router, private Auth: AuthService, private userProfileService: UserProfileService) { }
 
   async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
-    this.userProfileService.getUserInfo(this.uid).onSnapshot((res) => {
-      this.userProfile = {
-        fullName: res.data().fullName,
-        email: res.data().email,
-      };
-      console.log(this.userProfile);
-
-    })
+    this.userProfile = await this.userProfileService.getCurrentUserInfo();
   }
-
 
   async logout() {
     await this.Auth.userLogOut();

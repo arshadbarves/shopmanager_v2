@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ export class ItemEntryPage implements OnInit {
   addItemForm: FormGroup;
   itemSellingPrice: any;
 
-  constructor(private formbuilder: FormBuilder, private stockItemsService: StockItemsService, private router: Router, private userProfileService: UserProfileService) {
+  constructor(private formbuilder: FormBuilder, private toastController: ToastController, private stockItemsService: StockItemsService, private router: Router, private userProfileService: UserProfileService) {
     this.addItemForm = this.formbuilder.group({
       itemCode: [''],
       itemName: [''],
@@ -30,7 +31,7 @@ export class ItemEntryPage implements OnInit {
   ngOnInit() {
   }
 
-  addItem(value) {
+  async addItem(value) {
     this.addItemForm = this.formbuilder.group({
       itemCode: value.itemCode,
       itemName: value.itemName,
@@ -43,6 +44,14 @@ export class ItemEntryPage implements OnInit {
       billReference: value.billReference
     });
     this.stockItemsService.addStockItem(this.addItemForm.value);
+    const toast = await this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: 'Item Added Successfully!',
+      animated: true,
+      mode: "ios"
+    });
+    await toast.present();
     this.router.navigateByUrl('/items');
   }
 

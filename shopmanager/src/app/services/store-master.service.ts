@@ -24,8 +24,8 @@ export class StoreMasterService {
   }
 
   addStoreMaster(storeMasterInfoDetail) {
-    this.storeMasterInfo = this.fireStore.collection('storeMasterList');
-    this.storeMasterInfo.add({
+    this.storeMasterInfo = this.fireStore.collection('storeMasterList').doc((storeMasterInfoDetail.storeCode).toString());
+    this.storeMasterInfo.set({
       storeCode: storeMasterInfoDetail.storeCode,
       name: storeMasterInfoDetail.name,
       address: storeMasterInfoDetail.address,

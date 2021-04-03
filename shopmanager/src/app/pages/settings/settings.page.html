@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode=ios>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>
+        Dark Theme
+      </ion-label>
+      <ion-toggle id="themeSwitch" [checked]="toggleValue" [(ngModel)]="toggleValue" (ionChange)="onClick($event)"
+        slot="end"></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

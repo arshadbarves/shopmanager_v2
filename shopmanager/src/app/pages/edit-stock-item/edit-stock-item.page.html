@@ -21,12 +21,14 @@
 
     <ion-item lines="full">
       <ion-label position="floating">Purchase Price</ion-label>
-      <ion-input name="PurchasePrice" type="number" required formControlName="purchasePrice"></ion-input>
+      <ion-input name="PurchasePrice" type="number" (ionBlur)='calculateSellingPrice(editItemForm.value)' required
+        formControlName="purchasePrice"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Tax</ion-label>
-      <ion-input name="Tax" type="number" required formControlName="tax"></ion-input>
+      <ion-input name="Tax" type="number" (ionBlur)='calculateSellingPrice(editItemForm.value)' required
+        formControlName="tax"></ion-input>
     </ion-item>
 
     <ion-item lines="full">

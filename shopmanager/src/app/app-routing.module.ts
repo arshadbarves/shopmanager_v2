@@ -89,6 +89,14 @@ const routes: Routes = [
     path: 'edit-item-qty-modal',
     loadChildren: () => import('./pages/edit-item-qty-modal/edit-item-qty-modal.module').then( m => m.EditItemQtyModalPageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
 
 
 ];

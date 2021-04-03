@@ -12,7 +12,6 @@ import { StockItemsService } from 'src/app/services/stock-items.service';
 export class ItemsPage implements OnInit {
   stockItemCollection: any;
   noItemData: any;
-  uid: any;
   result: any;
   data: any = "";
   constructor(private alertController: AlertController, private stockItemsService: StockItemsService, public router: Router, private userProfileService: UserProfileService) {
@@ -20,7 +19,6 @@ export class ItemsPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
     this.stockItemsService.getStockItems().subscribe(res => {
       this.stockItemCollection = res;
       this.data = this.stockItemCollection;
@@ -50,6 +48,7 @@ export class ItemsPage implements OnInit {
           text: "Confirm",
           cssClass: 'secondary',
           handler: () => {
+            console.log(item);
             this.stockItemsService.deleteStockItem(item.id);
           }
         },

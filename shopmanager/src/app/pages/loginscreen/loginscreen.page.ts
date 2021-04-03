@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-loginscreen',
   templateUrl: './loginscreen.page.html',
@@ -48,12 +47,7 @@ export class LoginscreenPage implements OnInit {
     try {
       this.authservice.loginFireauth(value).then(resp => {
         this.loading.dismiss();
-        this.userProfileService.setUserUID(resp.user.uid);
-        this.userProfileService.storeUserInfoLocal(resp.user.uid, {
-          displayName: value.displayName,
-          email: value.email,
-          phoneNumber: value.phoneNumber
-        });
+
         this.router.navigate(['tabs']);
         this.authservice.userLogIn();
       }, error => {

@@ -33,4 +33,25 @@ import { firebaseConfig } from 'src/environments/environment';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    this.initTheme();
+    
+    // let systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+    // systemDark.addListener(this.colorTest);
+  }
+
+  initTheme() {
+    var darkThemeSelected = (localStorage.getItem('themeSwitch') !== null && localStorage.getItem('themeSwitch') === 'dark');
+
+    darkThemeSelected ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
+  }
+
+  // colorTest(systemInitiatedDark) {
+  //   if (systemInitiatedDark.matches) {
+  //     document.body.setAttribute('data-theme', 'dark');
+  //   } else {
+  //     document.body.removeAttribute('data-theme');
+  //   }
+  // }
+}

@@ -1,44 +1,41 @@
-ion-content {
-    --ion-background-color: #ffffff !important;
-}
-
 ion-header {
-    background-color: #0f3864;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0px 15px 18px rgba(0, 0, 0, 0.2);
+  background-color: #0f3864;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 15px 18px rgba(0, 0, 0, 0.2);
 
-    ion-toolbar{
-        --background: transparent;
-        color: #FFFFFF;
+  ion-toolbar {
+    --background: transparent;
+    color: #ffffff;
 
-        ion-back-button {
-            color: #ffffff;
-        }
+    ion-back-button {
+      color: #ffffff;
     }
+  }
 }
 
 .no-items {
-    margin:10%;
-    text-align: center;
+  margin: 10%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  h1 {
     display: flex;
     justify-content: center;
-    align-content: center;
     align-items: center;
-    
-    h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: calc(var(--title) + var(--font-size-adj));
-    }
+    font-size: calc(var(--title) + var(--font-size-adj));
+  }
 }
 
-.searchbox{
-    --background: #ffffff;
-    text-align: left;
+.searchbox {
+  --background: #ffffff;
+  --color: #2c2c2c;
+  text-align: left;
 }
 
 ion-icon {
-    color: #ffffff;
+  color: #ffffff;
 }

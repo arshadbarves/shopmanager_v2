@@ -44,7 +44,6 @@ export class AddItemModalPage implements OnInit {
   }
 
   selectedItem(item) {
-    console.log(item);
     let selectedItem = {
       itemCode: item.itemCode,
       itemName: item.itemName,

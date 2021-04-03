@@ -1,57 +1,49 @@
-ion-content {
-    --ion-background-color: #fbfbfb !important;
-}
-
 ion-header {
-    background-color: #0f3864;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0px 15px 18px rgba(0, 0, 0, 0.2);
+  background-color: #0f3864;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 15px 18px rgba(0, 0, 0, 0.2);
 
-    ion-toolbar{
-        --background: transparent;
-        color: #FFFFFF;
+  ion-toolbar {
+    --background: transparent;
+    color: #ffffff;
 
-        ion-back-button {
-            color: #ffffff;
-        }
+    ion-back-button {
+      color: #ffffff;
     }
+  }
 }
 
 .itemName {
-    font-size: calc(var(--normal) + var(--font-size-adj));
-    margin: 5% 0;
-    padding: 5%;
-    border: 2px solid #0f3864;
-    border-radius: 5px;
-    // border-bottom: 2px solid #0f3864;
-    background-color: #FFFFFF;
+  font-size: calc(var(--normal) + var(--font-size-adj));
+  margin: 5% 0;
+  padding: 5%;
+  border: 2px solid #0f3864;
+  border-radius: 5px;
 }
 
 ion-card {
-    background-color: #ffffff;
-    box-shadow: none;
-    border: 2px solid #0f3864;
+  box-shadow: none;
+  border: 2px solid #0f3864;
 }
 
 .itemcontent {
-    ion-item {
-        --background: #ffffff;
-        padding: 0;
-    }
+  ion-item {
+    padding: 0;
+  }
 
-    .selectStore {
-        border: 2px solid #0f3864;
-        border-radius: 5px;
-    }
+  .selectStore {
+    border: 2px solid #0f3864;
+    border-radius: 5px;
+  }
 
-    .qtyItem {
-        margin: 5% 0;
-        border: 2px solid #0f3864;
-        border-radius: 5px;
-    }
+  .qtyItem {
+    margin: 5% 0;
+    border: 2px solid #0f3864;
+    border-radius: 5px;
+  }
 }
 
 ion-button {
-    margin: 0 5%;
+  margin: 0 5%;
 }

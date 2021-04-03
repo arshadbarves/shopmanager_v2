@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="ios">
+  <div id="header" *ngIf="userProfile">
+    <img *ngIf="userProfile.photoUrl" [src]="userProfile.photoUrl">
+    <div id="header" *ngIf="!userProfile.photoUrl">
+      <img src="assets/images/no-profile.png">
+    </div>
+    <div class="profile-name" *ngIf="userProfile.name">
+      <ion-chip color="secondary">
+        <ion-label color="dark">{{ userProfile.name }}</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="updateUserProfile(profileForm.value)">
+    <ion-card-content>
+      <ion-item class="name-input">
+        <ion-input name="name" type="text" placeholder="Fullname" formControlName="name">
+          <ion-icon name="person"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of profileFormMessages.name">
+          <div
+            *ngIf="profileForm.get('name').hasError(validation.type) && (profileForm.get('name').dirty || profileForm.get('name').touched)">
+            <ion-item class="error_message">{{validation.message}}</ion-item>
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="email-input" lines="none">
+        <ion-input name="email" type="text" placeholder="Email" formControlName="email" disabled>
+          <ion-icon name="mail"></ion-icon>
+        </ion-input>
+      </ion-item>
+      <div class="update-profile-btn-wrap">
+        <ion-button fill="solid" shape="round" type="sumbit" class="update-profile-btn" [disabled]="!profileForm.valid">
+          Update Profile</ion-button>
+      </div>
+    </ion-card-content>
+  </form>
+</ion-content>

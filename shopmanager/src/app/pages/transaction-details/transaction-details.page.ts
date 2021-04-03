@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { StockItemsService } from './../../services/stock-items.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { TransactionService } from './../../services/transaction.service';
@@ -14,7 +15,7 @@ export class TransactionDetailsPage implements OnInit {
   transactionDetailsInfo: any;
   currentUserInfo: any;
 
-  constructor(private route: ActivatedRoute, private stockItemsService: StockItemsService, private userProfileService: UserProfileService, private transactionService: TransactionService, private router: Router) {
+  constructor(private route: ActivatedRoute, private toastController: ToastController, private stockItemsService: StockItemsService, private userProfileService: UserProfileService, private transactionService: TransactionService, private router: Router) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.transactionDetailsInfo = this.router.getCurrentNavigation().extras.state.transactionDetailInfo;
       this.transactionDetails = this.transactionDetailsInfo.detail;
@@ -25,9 +26,17 @@ export class TransactionDetailsPage implements OnInit {
     this.currentUserInfo = await this.userProfileService.getCurrentUserInfo();
   }
 
-  acceptRequest() {
+  async acceptRequest() {
     this.transactionService.updateTransaction(this.currentUserInfo.email, this.transactionDetailsInfo);
     this.stockItemsService.updateStockItem(this.transactionDetailsInfo.detail.itemId, this.transactionDetailsInfo);
+    const toast = await this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: 'Transaction Accepted Successfully!',
+      animated: true,
+      mode: "ios"
+    });
+    await toast.present();
     this.router.navigateByUrl('/');
   }
 

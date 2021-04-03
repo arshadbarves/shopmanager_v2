@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { StoreMasterService } from './../../services/store-master.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -12,14 +13,13 @@ import { UserProfileService } from 'src/app/services/user-profile.service';
 export class StoreMasterEntryPage implements OnInit {
   addStoreMasterForm: FormGroup;
   itemSellingPrice: any;
-  uid: any;
   userList: any;
 
   customActionSheetOptions: any = {
     header: 'Select User'
   };
 
-  constructor(private formbuilder: FormBuilder, private storeMasterService: StoreMasterService, private router: Router, private userProfileService: UserProfileService) {
+  constructor(private formbuilder: FormBuilder, private toastController: ToastController, private storeMasterService: StoreMasterService, private router: Router, private userProfileService: UserProfileService) {
     this.addStoreMasterForm = this.formbuilder.group({
       storeCode: [''],
       name: [''],
@@ -29,13 +29,12 @@ export class StoreMasterEntryPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
     this.userProfileService.getAllUsers().subscribe(res => {
       this.userList = res;
     });
   }
 
-  addStoreMaster(value) {
+  async addStoreMaster(value) {
     this.addStoreMasterForm = this.formbuilder.group({
       storeCode: value.storeCode,
       name: value.name,
@@ -43,6 +42,14 @@ export class StoreMasterEntryPage implements OnInit {
       userResponsible: value.userResponsible
     });
     this.storeMasterService.addStoreMaster(this.addStoreMasterForm.value);
+    const toast = await this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: 'Store Profile Added Successfully!',
+      animated: true,
+      mode: "ios"
+    });
+    await toast.present();
     this.router.navigateByUrl('/store-master');
   }
 

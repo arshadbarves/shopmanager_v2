@@ -1,18 +1,43 @@
 <ion-header class="ion-no-border" mode="ios">
   <ion-toolbar>
-    <ion-title>{{userProfile.fullName}}</ion-title>
+    <ion-title>My Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content mode="ios">
-  <div id="header">
-    <div class="profile-name"><span></span></div>
+  <div class="profile-header-image">
+  </div>
+  <div id="header" *ngIf="userProfile">
+    <img *ngIf="userProfile.photoUrl" [src]="userProfile.photoUrl">
+    <div id="header" *ngIf="!userProfile.photoUrl">
+      <img src="assets/images/no-profile.png">
+    </div>
+    <div class="profile-name" *ngIf="userProfile.name">
+      <ion-chip color="secondary">
+        <ion-label color="dark">{{ userProfile.name }}</ion-label>
+      </ion-chip>
+    </div>
   </div>
   <div class="profile-menu">
-    <ion-button expand="full">Edit Profile</ion-button>
-    <ion-button expand="full">Rewards & Coupons</ion-button>
-    <ion-button expand="full">Help Center</ion-button>
-    <ion-button expand="full">Payment</ion-button>
-    <ion-button (click)="logout()" expand="full">Logout</ion-button>
+    <div class="cardContent">
+      <ion-card button tappable routerLink="/edit-profile">
+        <ion-card-content>
+          <ion-icon name="person"></ion-icon>
+          <ion-text>Edit Profile</ion-text>
+        </ion-card-content>
+      </ion-card>
+      <ion-card button tappable routerLink="/settings">
+        <ion-card-content>
+          <ion-icon name="settings"></ion-icon>
+          <ion-text>Setting</ion-text>
+        </ion-card-content>
+      </ion-card>
+      <ion-card button tappable (click)="logout()">
+        <ion-card-content>
+          <ion-icon name="lock-closed"></ion-icon>
+          <ion-text>Logout</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

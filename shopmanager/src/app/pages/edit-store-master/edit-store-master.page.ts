@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { StoreMasterService } from './../../services/store-master.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -13,14 +14,13 @@ export class EditStoreMasterPage implements OnInit {
   editStoreMasterForm: FormGroup;
   storeDetail: any;
   storeId: any;
-  uid: any;
   userList: any;
 
   customActionSheetOptions: any = {
     header: 'Select User'
   };
 
-  constructor(private formbuilder: FormBuilder, private userProfileService: UserProfileService, private route: ActivatedRoute, private storeMasterService: StoreMasterService, private router: Router) {
+  constructor(private formbuilder: FormBuilder,private toastController: ToastController, private userProfileService: UserProfileService, private route: ActivatedRoute, private storeMasterService: StoreMasterService, private router: Router) {
     this.storeId = this.route.snapshot.paramMap.get('id');
 
     this.editStoreMasterForm = this.formbuilder.group({
@@ -32,7 +32,6 @@ export class EditStoreMasterPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.uid = await this.userProfileService.getUserUID();
     this.userProfileService.getAllUsers().subscribe(res => {
       this.userList = res;
     });
@@ -47,7 +46,7 @@ export class EditStoreMasterPage implements OnInit {
     });
   }
 
-  editStoreMaster(value) {
+  async editStoreMaster(value) {
     this.editStoreMasterForm = this.formbuilder.group({
       storeCode: value.storeCode,
       name: value.name,
@@ -55,6 +54,14 @@ export class EditStoreMasterPage implements OnInit {
       userResponsible: value.userResponsible
     });
     this.storeMasterService.editStoreMaster(this.storeId, this.editStoreMasterForm.value);
+    const toast = await this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: 'Store Profile Updated Successfully!',
+      animated: true,
+      mode: "ios"
+    });
+    await toast.present();
     this.router.navigateByUrl('/store-master');
   }
 

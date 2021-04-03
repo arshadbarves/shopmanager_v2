@@ -12,6 +12,7 @@ export class AuthService {
   constructor(public auth: AngularFireAuth, private route: Router) { }
 
   loginFireauth(value) {
+
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password).then(
         res => resolve(res),

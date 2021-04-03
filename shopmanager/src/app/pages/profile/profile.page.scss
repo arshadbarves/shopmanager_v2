@@ -1,43 +1,16 @@
-ion-content {
-    --ion-background-color: #ffffff !important;
-}
-
 ion-header {
-    background-color: #0f3864;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0px 15px 18px rgba(0, 0, 0, 0.2);
+  background-color: #0f3864;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 15px 18px rgba(0, 0, 0, 0.2);
 
-    ion-toolbar{
-        --background: transparent;
-        color: #FFFFFF;
-
-        ion-back-button {
-            color: #ffffff;
-        }
-    }
-}
-
-
-.profile-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-top: 2%;
-    ion-button {
-        --background: transparent;
-        --background-activated: transparent;
-        --background-hover: transparent;
-        color: #3b3b3b;
-        font-weight: 600;
-        padding-left: 5%;
-        font-size: calc(var(--normal) + 2vw);
-    }
+  ion-toolbar {
+    --background: transparent;
+    color: #ffffff;
+  }
 }
 
 ion-content {
-  --background: #ffffff !important;
-
   #header {
     display: flex;
     flex-direction: column;
@@ -53,10 +26,39 @@ ion-content {
       box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .profile-name{
-        font-size: calc(var(--header) + var(--font-size-adj));
-        font-weight: 600;
-        padding: 5%;
+    .profile-name {
+      font-size: calc(var(--header) + var(--font-size-adj));
+      font-weight: 600;
+      padding: 5%;
+    }
+  }
+}
+
+.cardContent {
+  margin-top: 5%;
+  width: 100%;
+  text-align: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  ion-card {
+    height: calc(var(--largetitle) + 15vh);
+    height: auto;
+
+    ion-card-content {
+      padding: 10%;
+    }
+    ion-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(var(--smalltitle) + var(--font-size-adj));
+    }
+    ion-icon {
+      margin: 10%;
+      // color: #0f3864;
+      font-size: calc(var(--xlargetitle) + var(--font-size-adj));
     }
   }
 }

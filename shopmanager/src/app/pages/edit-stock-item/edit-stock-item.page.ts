@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -16,7 +17,7 @@ export class EditStockItemPage implements OnInit {
   itemDetail: any;
   itemID: any;
 
-  constructor(private formbuilder: FormBuilder, private userProfileService: UserProfileService, private route: ActivatedRoute, private stockItemsService: StockItemsService, private router: Router) {
+  constructor(private formbuilder: FormBuilder, private toastController: ToastController, private userProfileService: UserProfileService, private route: ActivatedRoute, private stockItemsService: StockItemsService, private router: Router) {
     this.itemID = this.route.snapshot.paramMap.get('id');
 
     this.editItemForm = this.formbuilder.group({
@@ -49,7 +50,7 @@ export class EditStockItemPage implements OnInit {
     });
   }
 
-  editItem(value) {
+  async editItem(value) {
     this.editItemForm = this.formbuilder.group({
       itemCode: value.itemCode,
       itemName: value.itemName,
@@ -62,6 +63,14 @@ export class EditStockItemPage implements OnInit {
       billReference: value.billReference
     });
     this.stockItemsService.editStockItem(this.itemID, this.editItemForm.value);
+    const toast = await this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: 'Item Updated Successfully!',
+      animated: true,
+      mode: "ios"
+    });
+    await toast.present();
     this.router.navigateByUrl('/items');
   }
 
