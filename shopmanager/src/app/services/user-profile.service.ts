@@ -15,16 +15,13 @@ export class UserProfileService {
   db = firebase.default.firestore()
   constructor(private fireStore: AngularFirestore) { }
 
-  removeUser() {
-    Storage.remove({ key: 'UID' });
-  }
-
   getUserInfo(uid) {
     return this.db.collection('userProfile').doc(uid);
   }
 
   async getCurrentUserInfo() {
     let user = firebase.default.auth().currentUser;
+    
     if (user != null) {
       this.currentUserInfo = {
         name: user.displayName,
@@ -37,6 +34,27 @@ export class UserProfileService {
     }
     return this.currentUserInfo;
   }
+
+  async storeCurrentUserInfo() {
+    let userInfo = await this.getCurrentUserInfo();
+    await Storage.set({
+    key: 'currentUserInfo',
+    value: JSON.stringify({
+      name: userInfo.name,
+      email: userInfo.email,
+      uid: userInfo.uid
+    })
+  });
+  }
+
+  removeCurrentUserInfo() {
+    Storage.remove({ key: 'currentUserInfo' });
+  }
+
+  async getCurrentUserInfoLocal() {
+    const ret = await Storage.get({ key: 'currentUserInfo' });
+    return JSON.parse(ret.value);
+}
 
   getAllUsers() {
     let userList = this.fireStore.collection('userProfile');

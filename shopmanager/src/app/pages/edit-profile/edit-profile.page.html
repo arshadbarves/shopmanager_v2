@@ -20,7 +20,7 @@
     </div>
   </div>
   <form [formGroup]="profileForm" (ngSubmit)="updateUserProfile(profileForm.value)">
-    <ion-card-content>
+    <ion-card>
       <ion-item class="name-input">
         <ion-input name="name" type="text" placeholder="Fullname" formControlName="name">
           <ion-icon name="person"></ion-icon>
@@ -39,10 +39,10 @@
           <ion-icon name="mail"></ion-icon>
         </ion-input>
       </ion-item>
+      </ion-card>
       <div class="update-profile-btn-wrap">
         <ion-button fill="solid" shape="round" type="sumbit" class="update-profile-btn" [disabled]="!profileForm.valid">
           Update Profile</ion-button>
       </div>
-    </ion-card-content>
   </form>
 </ion-content>

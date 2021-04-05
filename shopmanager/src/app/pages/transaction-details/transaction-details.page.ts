@@ -28,7 +28,7 @@ export class TransactionDetailsPage implements OnInit {
 
   async acceptRequest() {
     this.transactionService.updateTransaction(this.currentUserInfo.email, this.transactionDetailsInfo);
-    this.stockItemsService.updateStockItem(this.transactionDetailsInfo.detail.itemId, this.transactionDetailsInfo);
+    this.stockItemsService.updateStockItem(this.transactionDetailsInfo);
     const toast = await this.toastController.create({
       color: 'dark',
       duration: 2000,

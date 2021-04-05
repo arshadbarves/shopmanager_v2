@@ -29,6 +29,5 @@ export class SalesService {
       totalCollectedAmount: billCollection.totalCollectedAmount,
       items: billCollection.items
     });
-
   }
 }

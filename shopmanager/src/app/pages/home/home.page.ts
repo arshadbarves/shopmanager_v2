@@ -41,51 +41,17 @@ export class HomePage implements OnInit {
       },
       {
         'id': 5,
-        'title': 'Landline',
-        'icon': 'basket',
-        'color': '#e7b871'
+        'title': 'Edit Profile',
+        'icon': 'person',
+        'color': '#e7b871',
+        'route': 'edit-profile'
       },
       {
         'id': 6,
-        'title': 'Stock Item Entry',
-        'icon': 'basket',
-        'color': '#4dd162'
-      },
-      {
-        'id': 7,
-        'title': 'Mobile',
-        'icon': 'call',
-        'color': '#2196f3'
-      },
-      {
-        'id': 8,
-        'title': 'Landline',
-        'icon': 'basket',
-        'color': '#596fec'
-      },
-      {
-        'id': 9,
-        'title': 'Stock Item Entry',
-        'icon': 'basket',
-        'color': '#ff7b84'
-      },
-      {
-        'id': 10,
-        'title': 'Mobile',
-        'icon': 'call',
-        'color': '#f0c30f'
-      },
-      {
-        'id': 11,
-        'title': 'Landline',
-        'icon': 'basket',
-        'color': '#0b9f8e'
-      },
-      {
-        'id': 12,
-        'title': 'Stock Item Entry',
-        'icon': 'basket',
-        'color': 'ff7b84'
+        'title': 'Settings',
+        'icon': 'settings',
+        'color': '#4dd162',
+        'route': 'settings'
       }
     ]
   }

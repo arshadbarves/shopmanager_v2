@@ -47,7 +47,7 @@ export class LoginscreenPage implements OnInit {
     try {
       this.authservice.loginFireauth(value).then(resp => {
         this.loading.dismiss();
-
+        this.userProfileService.storeCurrentUserInfo();
         this.router.navigate(['tabs']);
         this.authservice.userLogIn();
       }, error => {

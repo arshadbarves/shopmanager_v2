@@ -37,7 +37,7 @@ export class MoveStockItemPage implements OnInit {
 
   async requestToMove() {
     if (this.selectedStore && this.qtyToMove) {
-      if (this.data.storeAssignment[0].availableQty < this.qtyToMove) {
+      if (this.data.storeAssignment.availableQty < this.qtyToMove) {
         const toast = await this.toastController.create({
           color: 'dark',
           duration: 2000,
@@ -52,12 +52,11 @@ export class MoveStockItemPage implements OnInit {
         this.transactionInfo = {
           itemCode: this.data.itemCode,
           itemName: this.data.itemName,
-          fromStore: this.data.storeAssignment[0].storeCode,
+          fromStore: this.data.storeAssignment.storeCode,
           toStore: this.selectedStore,
           qtyRequested: this.qtyToMove,
-          qtyAvailability: this.data.storeAssignment[0].availableQty,
-          email: this.currentUserInfo.email,
-          itemId: this.data.id,
+          qtyAvailability: this.data.storeAssignment.availableQty,
+          email: this.currentUserInfo.email
         }
         this.transactionService.RequestToMove(this.transactionInfo);
         this.router.navigateByUrl('items');

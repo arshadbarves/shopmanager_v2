@@ -1,3 +1,4 @@
+import { StoreMasterService } from './store-master.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app'
@@ -9,17 +10,35 @@ import { UserProfileService } from './user-profile.service';
 export class StockItemsService {
 
   stockItemsCollection: AngularFirestoreCollection;
-  itemInfo: any;
   itemDetailInfo: any;
   db = firebase.default.firestore();
 
-  constructor(private fireStore: AngularFirestore, private userProfileService: UserProfileService) {
+  constructor(private fireStore: AngularFirestore, private storeMasterService: StoreMasterService, private userProfileService: UserProfileService) {
 
   }
 
   getStockItems() {
-    this.stockItemsCollection = this.fireStore.collection('itemList');
-    return this.stockItemsCollection.valueChanges({ idField: 'id' });
+
+    let itemsInfo = [];
+    this.storeMasterService.getCurrentUserStore().then(
+      res => {
+        let storeCode = res;
+        this.stockItemsCollection = this.fireStore.collection('itemList');
+        this.stockItemsCollection.valueChanges().forEach(res => {
+          for (let i = 0; i < res.length; i++) {
+
+            let itemInfo = res[i];
+            this.db.collection('itemList').doc((res[i].itemCode).toString()).collection('storeAssignment').where('storeCode', '==', storeCode).onSnapshot(res => {
+              res.forEach(res => {
+                itemInfo.storeAssignment = res.data();
+                itemsInfo.push(itemInfo);
+              });
+            });
+          }
+        });
+      }
+    );
+    return itemsInfo;
   }
 
   deleteStockItem(itemId) {
@@ -27,8 +46,8 @@ export class StockItemsService {
   }
 
   addStockItem(itemInfoDetail) {
-    this.itemInfo = this.fireStore.collection('itemList').doc((itemInfoDetail.itemCode).toString());
-    this.itemInfo.set({
+    let itemInfo = this.fireStore.collection('itemList').doc((itemInfoDetail.itemCode).toString());
+    itemInfo.set({
       itemCode: itemInfoDetail.itemCode,
       itemName: itemInfoDetail.itemName,
       purchasePrice: itemInfoDetail.purchasePrice,
@@ -37,18 +56,18 @@ export class StockItemsService {
       sellingPrice: itemInfoDetail.sellingPrice,
       quantity: itemInfoDetail.quantity,
       dateOfPurchase: firebase.default.firestore.Timestamp.fromDate(new Date(itemInfoDetail.dateOfPurchase)).toDate(),
-      billReference: itemInfoDetail.billReference,
-      storeAssignment: [{
-        assignedQty: itemInfoDetail.quantity,
-        availableQty: itemInfoDetail.quantity,
-        storeCode: "home"
-      }]
+      billReference: itemInfoDetail.billReference
     });
+    itemInfo.collection('storeAssignment').doc('home').set({
+      assignedQty: itemInfoDetail.quantity,
+      availableQty: itemInfoDetail.quantity,
+      storeCode: "home"
+    })
   }
 
   editStockItem(itemID, itemInfoDetail) {
-    this.itemInfo = this.fireStore.collection('itemList').doc(itemID);
-    this.itemInfo.update({
+    let itemInfo = this.fireStore.collection('itemList').doc(itemID);
+    itemInfo.update({
       itemCode: itemInfoDetail.itemCode,
       itemName: itemInfoDetail.itemName,
       purchasePrice: itemInfoDetail.purchasePrice,
@@ -57,12 +76,7 @@ export class StockItemsService {
       sellingPrice: itemInfoDetail.sellingPrice,
       quantity: itemInfoDetail.quantity,
       dateOfPurchase: firebase.default.firestore.Timestamp.fromDate(new Date(itemInfoDetail.dateOfPurchase)).toDate(),
-      billReference: itemInfoDetail.billReference,
-      storeAssignment: [{
-        assignedQty: itemInfoDetail.quantity,
-        availableQty: itemInfoDetail.quantity,
-        storeCode: "home"
-      }]
+      billReference: itemInfoDetail.billReference
     });
   }
 
@@ -70,24 +84,33 @@ export class StockItemsService {
     return this.db.collection('itemList').doc(itemID);
   }
 
-  updateStockItem(itemID, itemInfoDetail) {
+  updateStockItem(itemInfoDetail) {
 
-    this.itemInfo = this.db.collection('itemList').doc(itemID);
+    let itemInfo = this.db.collection('itemList').doc(itemInfoDetail.detail.itemCode);
 
-    this.itemInfo.update({
-      storeAssignment: [{
-        assignedQty: itemInfoDetail.detail.qtyAvailable,
-        availableQty: itemInfoDetail.detail.qtyAvailable - itemInfoDetail.detail.qtyRequested,
-        storeCode: "home"
-      }]
+    itemInfo.collection('storeAssignment').doc('home').update({
+      availableQty: firebase.default.firestore.FieldValue.increment(-itemInfoDetail.detail.qtyRequested)
     });
-    this.itemInfo.update({
-      storeAssignment: firebase.default.firestore.FieldValue.arrayUnion(
-        {
-          assignedQty: itemInfoDetail.detail.qtyRequested,
-          availableQty: itemInfoDetail.detail.qtyRequested,
-          storeCode: itemInfoDetail.detail.toStore
-        })
+
+    itemInfo.collection('storeAssignment').doc((itemInfoDetail.detail.toStore).toString()).set({
+      assignedQty: firebase.default.firestore.FieldValue.increment(itemInfoDetail.detail.qtyRequested),
+      availableQty: firebase.default.firestore.FieldValue.increment(itemInfoDetail.detail.qtyRequested),
+      storeCode: itemInfoDetail.detail.toStore
+    }, { merge: true });
+  }
+
+  updateStockItemBilling(itemInfoDetail) {
+    itemInfoDetail.items.forEach(item => {
+      let itemInfo = this.db.collection('itemList').doc(item.itemCode);
+
+      itemInfo.update({
+        quantity: firebase.default.firestore.FieldValue.increment(-item.qty)
+      });
+
+      itemInfo.collection('storeAssignment').doc((itemInfoDetail.storeCode).toString()).update({
+        assignedQty: firebase.default.firestore.FieldValue.increment(-item.qty),
+        availableQty: firebase.default.firestore.FieldValue.increment(-item.qty),
+      });
     });
   }
 }

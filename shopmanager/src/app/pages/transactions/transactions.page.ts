@@ -21,7 +21,7 @@ export class TransactionsPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.currentUserInfo = await this.userProfileService.getCurrentUserInfo();
+    this.currentUserInfo = await this.userProfileService.getCurrentUserInfoLocal();
     this.db.collection('storeMasterList').where('userResponsible', '==', this.currentUserInfo.email).get().then((snapShot) => {
       snapShot.docs.forEach(res => {
         this.currentUserStore = res.data().storeCode;

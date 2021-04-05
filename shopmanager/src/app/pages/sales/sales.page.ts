@@ -1,3 +1,4 @@
+import { StockItemsService } from 'src/app/services/stock-items.service';
 import { Router } from '@angular/router';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { SalesService } from './../../services/sales.service';
@@ -20,10 +21,10 @@ export class SalesPage implements OnInit {
   currentUserStore: any;
   previousBillNumber: any;
 
-  constructor(public modalController: ModalController, private router: Router, private userProfileService: UserProfileService, private salesService: SalesService) { }
+  constructor(public modalController: ModalController, private stockItemsService: StockItemsService, private router: Router, private userProfileService: UserProfileService, private salesService: SalesService) { }
 
   async ngOnInit() {
-    this.currentUserInfo = await this.userProfileService.getCurrentUserInfo();
+    this.currentUserInfo = await this.userProfileService.getCurrentUserInfoLocal();
     this.db.collection('storeMasterList').where('userResponsible', '==', this.currentUserInfo.email).get().then((snapShot) => {
       snapShot.docs.forEach(res => {
         this.currentUserStore = res.data().storeCode;
@@ -81,6 +82,7 @@ export class SalesPage implements OnInit {
     }
 
     this.salesService.addBilling(this.billCollection);
+    this.stockItemsService.updateStockItemBilling(this.billCollection)
     this.router.navigateByUrl('/');
   }
 

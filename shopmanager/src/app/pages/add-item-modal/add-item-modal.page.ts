@@ -11,15 +11,13 @@ import { StockItemsService } from 'src/app/services/stock-items.service';
 export class AddItemModalPage implements OnInit {
   stockItemCollection: any;
   noItemData: any;
-  data: any = "";
+  data: any;
 
   constructor(private modalCtrl: ModalController, private stockItemsService: StockItemsService, private userProfileService: UserProfileService) { }
 
   async ngOnInit() {
-    this.stockItemsService.getStockItems().subscribe(res => {
-      this.stockItemCollection = res;
-      this.data = this.stockItemCollection;
-    });
+    this.data = await this.stockItemsService.getStockItems();
+
   }
 
   dismissModal() {

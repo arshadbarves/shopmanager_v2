@@ -1,6 +1,8 @@
+import { UserProfileService } from './user-profile.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,10 @@ export class StoreMasterService {
   storeMasterCollection: AngularFirestoreCollection;
   storeMasterInfo: any;
   editstoreMasterInfo: any;
+  userInfo: any;
   db = firebase.default.firestore();
 
-  constructor(private fireStore: AngularFirestore) {
+  constructor(private fireStore: AngularFirestore, private userProfileService: UserProfileService) {
   }
 
   getStoreMaster() {
@@ -45,5 +48,17 @@ export class StoreMasterService {
 
   getStoreMasterDetail(storeMasterId) {
     return this.db.collection('storeMasterList').doc(storeMasterId);
+  }
+
+  async getCurrentUserStore() {
+    let currentUsertoreCode;
+    this.userInfo = await this.userProfileService.getCurrentUserInfoLocal();
+    await this.db.collection('storeMasterList').where('userResponsible', '==', this.userInfo.email).get().then((snapShot) => {
+      snapShot.docs.forEach(res => {
+        currentUsertoreCode = res.data().storeCode;
+      })
+    });
+    return currentUsertoreCode;
+
   }
 }

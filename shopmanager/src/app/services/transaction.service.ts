@@ -27,7 +27,6 @@ export class TransactionService {
       qtyRequested: storeMasterInfoDetail.qtyRequested,
       qtyAvailable: storeMasterInfoDetail.qtyAvailability,
       status: "Requested",
-      itemId: storeMasterInfoDetail.itemId,
       requestedUser: storeMasterInfoDetail.email,
       requestedDate: firebase.default.firestore.Timestamp.fromDate(new Date()).toDate(),
       acceptedByUser: null,

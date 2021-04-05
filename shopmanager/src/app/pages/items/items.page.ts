@@ -19,11 +19,10 @@ export class ItemsPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.stockItemsService.getStockItems().subscribe(res => {
-      this.stockItemCollection = res;
-      this.data = this.stockItemCollection;
-    });
+    this.stockItemCollection = await this.stockItemsService.getStockItems();
+    this.data = this.stockItemCollection;
   }
+
 
   async searchItem(ev: any) {
     this.data = this.stockItemCollection;
@@ -70,7 +69,9 @@ export class ItemsPage implements OnInit {
     this.router.navigate(['move-stock-item'], navigationExtras);
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+
+
     setTimeout(() => {
       this.noItemData = "NO ITEM AVAILABLE!"
     }, 3000);
