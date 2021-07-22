@@ -3,6 +3,8 @@ import { UserProfileService } from './../../services/user-profile.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { StockItemsService } from 'src/app/services/stock-items.service';
+import { StoreMasterService } from 'src/app/services/store-master.service';
+import * as firebase from 'firebase/app'
 
 @Component({
   selector: 'app-items',
@@ -14,13 +16,37 @@ export class ItemsPage implements OnInit {
   noItemData: any;
   result: any;
   data: any = "";
-  constructor(private alertController: AlertController, private stockItemsService: StockItemsService, public router: Router, private userProfileService: UserProfileService) {
+
+  db = firebase.default.firestore();
+
+  constructor(private alertController: AlertController, private stockItemsService: StockItemsService, public router: Router, private storeMasterService: StoreMasterService, private userProfileService: UserProfileService) {
 
   }
 
-  async ngOnInit() {
-    this.stockItemCollection = await this.stockItemsService.getStockItems();
-    this.data = this.stockItemCollection;
+  ngOnInit() {
+
+    this.storeMasterService.getCurrentUserStore().then(async (res) => {
+
+      let storeCode = res
+      await this.stockItemsService.getStockItems().subscribe(res => {
+        let itemsInfo = [];
+
+        for (let i = 0; i < res.length; i++) {
+
+          let itemInfo = res[i];
+          this.db.collection('itemList').doc((res[i].itemCode).toString()).collection('storeAssignment').where('storeCode', '==', storeCode).onSnapshot(res => {
+            res.forEach(res => {
+              itemInfo.storeAssignment = res.data();
+              itemsInfo.push(itemInfo);
+            });
+          });
+        }
+        this.data = itemsInfo;
+        this.stockItemCollection = itemsInfo;
+      });
+
+    });
+
   }
 
 
@@ -70,8 +96,6 @@ export class ItemsPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-
-
     setTimeout(() => {
       this.noItemData = "NO ITEM AVAILABLE!"
     }, 3000);

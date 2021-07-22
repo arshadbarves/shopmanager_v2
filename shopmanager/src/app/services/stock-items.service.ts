@@ -19,27 +19,14 @@ export class StockItemsService {
 
   getStockItems() {
 
-    let itemsInfo = [];
-    this.storeMasterService.getCurrentUserStore().then(
-      res => {
-        let storeCode = res;
-        this.stockItemsCollection = this.fireStore.collection('itemList');
-        this.stockItemsCollection.valueChanges().forEach(res => {
-          for (let i = 0; i < res.length; i++) {
 
-            let itemInfo = res[i];
-            this.db.collection('itemList').doc((res[i].itemCode).toString()).collection('storeAssignment').where('storeCode', '==', storeCode).onSnapshot(res => {
-              res.forEach(res => {
-                itemInfo.storeAssignment = res.data();
-                itemsInfo.push(itemInfo);
-              });
-            });
-          }
-        });
-      }
-    );
-    return itemsInfo;
+
+    this.stockItemsCollection = this.fireStore.collection('itemList');
+    return this.stockItemsCollection.valueChanges();
+
   }
+
+
 
   deleteStockItem(itemId) {
     this.fireStore.collection('itemList').doc(itemId).delete();
@@ -59,7 +46,6 @@ export class StockItemsService {
       billReference: itemInfoDetail.billReference
     });
     itemInfo.collection('storeAssignment').doc('home').set({
-      assignedQty: itemInfoDetail.quantity,
       availableQty: itemInfoDetail.quantity,
       storeCode: "home"
     })
@@ -93,7 +79,6 @@ export class StockItemsService {
     });
 
     itemInfo.collection('storeAssignment').doc((itemInfoDetail.detail.toStore).toString()).set({
-      assignedQty: firebase.default.firestore.FieldValue.increment(itemInfoDetail.detail.qtyRequested),
       availableQty: firebase.default.firestore.FieldValue.increment(itemInfoDetail.detail.qtyRequested),
       storeCode: itemInfoDetail.detail.toStore
     }, { merge: true });
@@ -108,7 +93,6 @@ export class StockItemsService {
       });
 
       itemInfo.collection('storeAssignment').doc((itemInfoDetail.storeCode).toString()).update({
-        assignedQty: firebase.default.firestore.FieldValue.increment(-item.qty),
         availableQty: firebase.default.firestore.FieldValue.increment(-item.qty),
       });
     });
